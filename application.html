@@ -18,10 +18,31 @@
              mapboxgl.accessToken = 'pk.eyJ1IjoibW9zc21hcHMiLCJhIjoiY2xqaHQxdjR4MDF5dTNlcGNoc25jcWs3NCJ9.GAj_Y8on-lSH9y9SzWDeHw';
              const map = new mapboxgl.Map({
                  container: 'Map', // container ID
-                 style: 'mapbox://styles/mossmaps/cljq0cfkr00xf01pgd5vy9x44', // style URL
+                 style: 'mapbox://styles/mapbox/light-v11', // style URL
                  center: [10.5, 51.2], // starting position [lng, lat]
                  zoom: 5.5 // starting zoom
              });
+
+             //Import GeoJSON Data
+             map.on('load', () => {
+                // Add a data source containing GeoJSON data.
+                map.addSource('Weimar Electoral Districts', {
+                'type': 'geojson',
+                'data': './Weimar Electoral Districts.geojson'
+                })})
+
+            map.on('load', () => {
+                map.addLayer({
+                    'id': 'Weimar Electoral Districts',
+                    'type': 'fill',
+                    'source': 'Weimar Electoral Districts',
+                    'layout':{},
+                    'paint': {
+                        'fill-color': '#0080ff', // blue color fill
+                        'fill-opacity': 0.5
+                        }
+                })
+            })
         </script>
 </body>
 
