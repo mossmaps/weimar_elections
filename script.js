@@ -5,4 +5,4 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-OpenStreetMap_Mapnik.addto(map);
+L.tileLayer(OpenStreeMap_Mapnik).addto(map);
