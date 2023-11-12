@@ -64,7 +64,6 @@ var defaultStyle = {
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
-        layer.bindPopup(`District: ${properties.engName}
-        1920 Winner: ${properties.parties_1920[0]} (${properties.percents_1920[0]}%)`) 
+        layer.bindPopup(`District:`) 
     }
 }).addTo(map)
