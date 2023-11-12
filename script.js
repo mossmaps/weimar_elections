@@ -62,9 +62,8 @@ var defaultStyle = {
 //add the electionResults geoJSON data to the map
 
 L.geoJSON(electionResults, {
-    style: defaultStyle
-}).addTo(map);
-
-//add a test pop-up upon clicking anywhere in the geoJSON
-
-electionResults.bindPopup('Hello World');
+    style: defaultStyle,
+    onEachFeature: function (feature, layer){
+        layer.bindPopup(feature.properties.engName)
+    }
+}).addTo(map)
