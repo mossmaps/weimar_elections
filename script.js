@@ -1,6 +1,12 @@
-var map = L.map('map').setView([52.52, 13.405], 10);
+//declare the map
+
+var map = L.map('map').setView([51.5, 11.25], 6);
+
+//add OSM tiles via the Provider plugin
 
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
+
+//declare the electionResults variable and add its geometry and attributes
 
 var electionResults = {
     "type": "FeatureCollection",
@@ -45,12 +51,20 @@ var electionResults = {
     ]
     }
 
+//set default style for testing
+
 var defaultStyle = {
     'color' : '#000000',
     'fill' : true,
     'fillColor' : '0033ff'
 }
 
+//add the electionResults geoJSON data to the map
+
 L.geoJSON(electionResults, {
     style: defaultStyle
 }).addTo(map);
+
+//add a test pop-up upon clicking anywhere in the geoJSON
+
+electionResults.bindPopup('Hello World');
