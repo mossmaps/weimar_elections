@@ -105,6 +105,8 @@ function setColor(winningParty){
             winnersColor = 'lightgray';
             break;
     }
+
+    return winnersColor;
 } 
 
 var defaultStyle = {
