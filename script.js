@@ -107,6 +107,12 @@ function setColor(winningParty){
     }
 } 
 
+var defaultStyle = {
+    'color' : '#000000',
+    'fill' : true,
+    'fillColor' : '#282828'
+}
+
 var myStyle = {
     'color' : '#000000',
     'fill' : true,
@@ -116,8 +122,10 @@ var myStyle = {
 //add the electionResults geoJSON data to the map
 
 L.geoJSON(electionResults, {
-    style: myStyle,
+    style: defaultStyle,
     onEachFeature: function (feature, layer){
-        layer.bindPopup(`<strong>District:</strong> ${feature.properties.engName}<br><strong>1920 Winner:</strong> ${feature.properties.parties_1920[0]} (${feature.properties.percents_1920[0]}%)`) 
+        layer.bindPopup(`<strong>District:</strong> ${feature.properties.engName}<br><strong>1920 Winner:</strong> ${feature.properties.parties_1920[0]} (${feature.properties.percents_1920[0]}%)`),
+        
+        layer.setStyle(myStyle)
     }
 }).addTo(map)
