@@ -84,7 +84,7 @@ function setColor(winningParty){
             winnersColor = 'green';
             break;
         case 'DNVP':
-            winnersColor = 'lightblue';
+            winnersColor = '#ff0000';
             break;
         case 'DVFP':
             winnersColor = 'lightred';
