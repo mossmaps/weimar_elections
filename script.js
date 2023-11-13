@@ -53,16 +53,70 @@ var electionResults = {
 
 //set default style for testing
 
-var defaultStyle = {
+
+
+//set color based on winning party
+function setColor(winningParty){
+    let winnersColor = ''
+    switch (winningParty){
+        case 'USPD':
+            winnersColor = 'beige';
+            break;
+        case 'KPD':
+            winnersColor = 'darkblue';
+            break;
+        case 'SPD':
+            winnersColor = 'blue';
+            break;
+        case 'DDP':
+            winnersColor = 'cadetblue';
+            break;
+        case 'Zentrum/BVP':
+            winnersColor = 'darkgreen';
+            break;
+        case 'DStP':
+            winnersColor = 'darkpurple';
+            break;
+        case 'BVP':
+            winnersColor = 'darkred';
+            break;
+        case 'DVP':
+            winnersColor = 'green';
+            break;
+        case 'DNVP':
+            winnersColor = 'lightblue';
+            break;
+        case 'DVFP':
+            winnersColor = 'lightred';
+            break;
+        case 'NSFB':
+            winnersColor = 'orange';
+            break;
+        case 'KSWR':
+            winnersColor = 'pink';
+            break;
+        case 'NSDAP':
+            winnersColor = "#964B00";
+            break;
+        case 'WP':
+            winnersColor = 'red';
+            break;
+        default:
+            winnersColor = 'lightgray';
+            break;
+    }
+} 
+
+var myStyle = {
     'color' : '#000000',
     'fill' : true,
-    'fillColor' : '0033ff'
+    'fillColor' : setColor(feature.properties.parties_1920[0])
 }
 
 //add the electionResults geoJSON data to the map
 
 L.geoJSON(electionResults, {
-    style: defaultStyle,
+    style: myStyle,
     onEachFeature: function (feature, layer){
         layer.bindPopup(`<strong>District:</strong> ${feature.properties.engName}<br><strong>1920 Winner:</strong> ${feature.properties.parties_1920[0]} (${feature.properties.percents_1920[0]}%)`) 
     }
