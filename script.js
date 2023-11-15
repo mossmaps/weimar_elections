@@ -108,7 +108,6 @@ function popupBuild(date, district, partysArray, percentsArray){
     for (let i = 1; i<partysArray.length; i++){
         popupString = popupString + `${partysArray[i]}: ${percentsArray[i]}%<br>`
     };
-    console.log(popupString);
     return popupString;
 }
 
@@ -124,7 +123,7 @@ var defaultStyle = {
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
-        layer.bindPopup(`<strong>District:</strong> ${feature.properties.engName}<br><strong>1920 Winner:</strong> ${feature.properties.parties_1920[0]} (${feature.properties.percents_1920[0]}%)`);
+        layer.bindPopup(popupBuild(1920, feature.properties.engName, feature.properties.parties_1920, feature.properties.percents_1920));
         
         //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
