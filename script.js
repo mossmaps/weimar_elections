@@ -53,49 +53,28 @@ function setColor(winningParty){
     let winnersColor = ''
     switch (winningParty){
         case 'USPD':
-            winnersColor = 'beige';
+            winnersColor = '#ff9999';
             break;
         case 'KPD':
-            winnersColor = 'darkblue';
+            winnersColor = '#ff00ff';
             break;
         case 'SPD':
-            winnersColor = 'blue';
-            break;
-        case 'DDP':
-            winnersColor = 'cadetblue';
-            break;
-        case 'Zentrum/BVP':
-            winnersColor = 'darkgreen';
-            break;
-        case 'DStP':
-            winnersColor = 'darkpurple';
-            break;
-        case 'BVP':
-            winnersColor = 'darkred';
-            break;
-        case 'DVP':
-            winnersColor = 'green';
-            break;
-        case 'DNVP':
             winnersColor = '#ff0000';
             break;
-        case 'DVFP':
-            winnersColor = 'lightred';
+        case 'Zentrum/BVP':
+            winnersColor = '#99ccff';
             break;
-        case 'NSFB':
-            winnersColor = 'orange';
+        case 'DVP':
+            winnersColor = '#00cc33';
             break;
-        case 'KSWR':
-            winnersColor = 'pink';
+        case 'DNVP':
+            winnersColor = '#cc6600';
             break;
         case 'NSDAP':
-            winnersColor = "#964B00";
-            break;
-        case 'WP':
-            winnersColor = 'red';
+            winnersColor = "#663300";
             break;
         default:
-            winnersColor = 'lightgray';
+            winnersColor = '#999999';
             break;
     }
 
@@ -116,7 +95,7 @@ function popupBuild(date, district, partysArray, percentsArray){
 var defaultStyle = {
     'color' : '#000000',
     'fill' : true,
-    'fillColor' : '#282828'
+    'fillColor' : '#999999'
 }
 
 //add the electionResults geoJSON data to the map
