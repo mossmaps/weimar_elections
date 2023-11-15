@@ -108,7 +108,8 @@ L.geoJSON(electionResults, {
         var myStyle = {
             'color' : '#000000',
             'fill' : true,
-            'fillColor' : setColor(feature.properties.parties_1920[0])
+            'fillColor' : setColor(feature.properties.parties_1920[0]),
+            'fillOpacity' : 0.6
         }
 
         layer.setStyle(myStyle)
