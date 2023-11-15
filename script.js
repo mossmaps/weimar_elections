@@ -1,13 +1,10 @@
 //declare the map
-
 var map = L.map('map').setView([51.5, 11.25], 6);
 
 //add OSM tiles via the Provider plugin
-
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //declare the electionResults variable and add its geometry and attributes
-
 var electionResults = {
     "type": "FeatureCollection",
     "name": "Weimar Election Data",
@@ -51,11 +48,7 @@ var electionResults = {
     ]
     }
 
-//set default style for testing
-
-
-
-//set color based on winning party
+//Function to set color based on winning party
 function setColor(winningParty){
     let winnersColor = ''
     switch (winningParty){
@@ -107,7 +100,19 @@ function setColor(winningParty){
     }
 
     return winnersColor;
-} 
+}
+
+//Function to write and format text for the pop-up window.
+function popupBuild(date, district, partysArray, percentsArray){
+    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${partysArray[0]}: ${percentsArray[0]}%<br>`;
+    for (let i = 1; i<partysArray.length; i++){
+        popupString = popupString + `${partysArray[i]}: ${percentsArray[i]}%<br>`
+    };
+    console.log(popupString);
+    return popupString;
+}
+
+//set default style for geoJSON
 
 var defaultStyle = {
     'color' : '#000000',
@@ -115,15 +120,13 @@ var defaultStyle = {
     'fillColor' : '#282828'
 }
 
-
-
 //add the electionResults geoJSON data to the map
-
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
         layer.bindPopup(`<strong>District:</strong> ${feature.properties.engName}<br><strong>1920 Winner:</strong> ${feature.properties.parties_1920[0]} (${feature.properties.percents_1920[0]}%)`);
         
+        //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
             'color' : '#000000',
             'fill' : true,
