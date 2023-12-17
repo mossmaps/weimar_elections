@@ -45,48 +45,73 @@ var electionResults = {
 //define selectedYear as a global-scope variable, defaulting to 1920
 var selectedYear = 'June, 1920';
 
-//Function to set partiesArray and percentsArray based on selectedYear
-function chooseData(year){
+//Function to set partiesArray based on selectedYear
+function choosePartiesArray(year){
     let partiesArray = null;
-    let percentsArray = null;
     switch (selectedYear){
         case 'June, 1920':
             partiesArray = 'parties_1920';
-            percentsArray = 'percents_1920';
             break;
         case 'May, 1924':
             partiesArray = 'parties_1924a';
-            percentsArray = 'percents_1924a';
             break;
         case 'December, 1924':
             partiesArray = 'parties_1924b';
-            percentsArray = 'percents_1924b';
             break;
         case 'May, 1928':
             partiesArray = 'parties_1928';
-            percentsArray = 'percents_1928';
             break;
         case 'September, 1930':
             partiesArray = 'parties_1930';
-            percentsArray = 'percents_1930';
             break;
         case 'July, 1932':
             partiesArray = 'parties_1932a';
-            percentsArray = 'percents_1932a';
             break;    
         case 'November, 1932':
             partiesArray = 'parties_1932b';
-            percentsArray = 'percents_1932b';
             break;
         case 'March, 1933':
             partiesArray = 'parties_1933';
-            percentsArray = 'percents_1933';
             break;
-    } 
+    }
+    return partiesArray;
 }
 
-//run the initial chooseData function
-chooseData(selectedYear);
+//Function to set percentsArray based on selectedYear
+function choosePercentsArray(year){
+    let percentsArray = null;
+    switch (selectedYear){
+        case 'June, 1920':
+            percentsArray = 'percents_1920';
+            break;
+        case 'May, 1924':
+            percentsArray = 'percents_1924a';
+            break;
+        case 'December, 1924':
+            percentsArray = 'percents_1924b';
+            break;
+        case 'May, 1928':
+            percentsArray = 'percents_1928';
+            break;
+        case 'September, 1930':
+            percentsArray = 'percents_1930';
+            break;
+        case 'July, 1932':
+            percentsArray = 'percents_1932a';
+            break;    
+        case 'November, 1932':
+            percentsArray = 'percents_1932b';
+            break;
+        case 'March, 1933':
+            percentsArray = 'percents_1933';
+            break;
+    }
+    return percentsArray
+}
+
+//run the initial choosePartiesArray and choosePercentsArray functions
+choosePartiesArray(selectedYear);
+choosePercentsArray(selectedYear);
 
 //Function to set color based on winning party
 function setColor(winningParty){
