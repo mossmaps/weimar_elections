@@ -43,7 +43,7 @@ var electionResults = {
     }
 
 //define selectedYear as a global-scope variable, defaulting to 1920
-var selectedYear = 1920;
+var selectedYear = 'June, 1920';
 
 //Function to set partysArray and percentsArray based on selectedYear
 function chooseData(year){
