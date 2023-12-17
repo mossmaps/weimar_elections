@@ -1,6 +1,9 @@
 //declare the map
 var map = L.map('map').setView([51.5, 11.25], 6);
 
+//declare selectedYear as a global variable, with default as 1920
+var selectedYear = 1920;
+
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
@@ -123,7 +126,7 @@ var yearSelectorMenu = L.control.custom({
 
   // Handle the dropdown menu change event
   function handleDropdownChange(select) {
-    var selectedYear = select.value;
+    selectedYear = select.value;
   }
 
 //add the electionResults geoJSON data to the map
