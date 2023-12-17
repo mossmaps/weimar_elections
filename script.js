@@ -102,6 +102,7 @@ var defaultStyle = {
 var yearSelectorMenu = L.control.custom({
     position: 'topleft',
     content: '<div class="custom-control">' +
+    '<br>' +
     '<strong>Select Election</strong>' +
     '<select onchange="handleDropdownChange(this)">' +
       '<option value="1920">June, 1920</option>' +
