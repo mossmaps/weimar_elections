@@ -99,11 +99,25 @@ var defaultStyle = {
 }
 
 //add custom control
-L.control.custom({
+var yearSelectorMenu = L.control.custom({
     position: 'topleft',
-    content: 'hello world'
-}
-).addTo(map);
+    content: '<div class="custom-control">' +
+    '<select onchange="handleDropdownChange(this)">' +
+      '<option value="option1">Option 1</option>' +
+      '<option value="option2">Option 2</option>' +
+      '</select>' +
+      '</div>',
+    classes: 'custom-control'
+  });
+
+  // Add the custom control to the map
+  customControl.addTo(map);
+
+  // Handle the dropdown menu change event
+  function handleDropdownChange(select) {
+    var selectedValue = select.value;
+    alert('Selected option: ' + selectedValue);
+  }
 
 //add the electionResults geoJSON data to the map
 L.geoJSON(electionResults, {
