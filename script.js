@@ -1,12 +1,3 @@
-//declare the map
-var map = L.map('map').setView([51.5, 11.25], 6);
-
-//declare selectedYear as a global variable, with default as 1920
-var selectedYear = 1920;
-
-//add OSM tiles via the Provider plugin
-L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
-
 //declare the electionResults variable and add its geometry and attributes
 var electionResults = {
     "type": "FeatureCollection",
@@ -84,17 +75,14 @@ function setColor(winningParty){
     return winnersColor;
 }
 
-
-
-//set default style for geoJSON
-
+//define default style for geoJSON
 var defaultStyle = {
     'color' : '#000000',
     'fill' : true,
     'fillColor' : '#999999'
 }
 
-//add custom control
+//define custom control
 var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
@@ -114,27 +102,23 @@ var yearSelectorMenu = L.control.custom({
     classes: 'custom-control'
   });
 
-  // Add the custom control to the map
-  yearSelectorMenu.addTo(map);
-
-  // Handle the dropdown menu change event
-  function handleDropdownChange(select) {
+// Function for the dropdown menu change event
+function handleDropdownChange(select) {
     selectedYear = select.value;
   }
 
-  //function to choose parties and percents arrays based on selectedYear
+//ON LOAD
+document.addEventListener('DOMContentLoaded', function() {
+  //declare the map
+var map = L.map('map').setView([51.5, 11.25], 6);
 
+// Add the custom control to the map
+yearSelectorMenu.addTo(map);
 
-//Function to write and format text for the pop-up window.
-function popupBuild(date, district, partysArray, percentsArray){
-    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${partysArray[0]}: ${percentsArray[0]}%</strong><br>`;
-    for (let i = 1; i<partysArray.length; i++){
-        popupString = popupString + `${partysArray[i]}: ${percentsArray[i]}%<br>`
-    };
-    return popupString;
-}
+//add OSM tiles via the Provider plugin
+L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-  //add the electionResults geoJSON data to the map
+//add the electionResults geoJSON data to the map, defaulting to 1920
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
@@ -151,3 +135,4 @@ L.geoJSON(electionResults, {
         layer.setStyle(myStyle)
     }
 }).addTo(map)
+})
