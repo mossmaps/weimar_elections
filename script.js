@@ -45,74 +45,6 @@ var electionResults = {
 //define selectedYear as a global-scope variable, defaulting to 1920
 var selectedYear = 'June, 1920';
 
-//Function to set partiesArray based on selectedYear
-function choosePartiesArray(year){
-    let partiesArray = null;
-    switch (selectedYear){
-        case 'June, 1920':
-            partiesArray = 'parties_1920';
-            break;
-        case 'May, 1924':
-            partiesArray = 'parties_1924a';
-            break;
-        case 'December, 1924':
-            partiesArray = 'parties_1924b';
-            break;
-        case 'May, 1928':
-            partiesArray = 'parties_1928';
-            break;
-        case 'September, 1930':
-            partiesArray = 'parties_1930';
-            break;
-        case 'July, 1932':
-            partiesArray = 'parties_1932a';
-            break;    
-        case 'November, 1932':
-            partiesArray = 'parties_1932b';
-            break;
-        case 'March, 1933':
-            partiesArray = 'parties_1933';
-            break;
-    }
-    return partiesArray;
-}
-
-//Function to set percentsArray based on selectedYear
-function choosePercentsArray(year){
-    let percentsArray = null;
-    switch (selectedYear){
-        case 'June, 1920':
-            percentsArray = 'percents_1920';
-            break;
-        case 'May, 1924':
-            percentsArray = 'percents_1924a';
-            break;
-        case 'December, 1924':
-            percentsArray = 'percents_1924b';
-            break;
-        case 'May, 1928':
-            percentsArray = 'percents_1928';
-            break;
-        case 'September, 1930':
-            percentsArray = 'percents_1930';
-            break;
-        case 'July, 1932':
-            percentsArray = 'percents_1932a';
-            break;    
-        case 'November, 1932':
-            percentsArray = 'percents_1932b';
-            break;
-        case 'March, 1933':
-            percentsArray = 'percents_1933';
-            break;
-    }
-    return percentsArray
-}
-
-//run the initial choosePartiesArray and choosePercentsArray functions
-choosePartiesArray(selectedYear);
-choosePercentsArray(selectedYear);
-
 //Function to set color based on winning party
 function setColor(winningParty){
     let winnersColor = ''
@@ -202,11 +134,67 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
-        //get the correct parties Array
-        let thisYearsParties = partiesArray;
-        let thisYearsPercents = percentsArray;
+        //set thisYearsParties
+        let thisYearsParties = null;
+        switch (selectedYear){
+            case 'June, 1920':
+                thisYearsParties = feature.properties.parties_1920;
+                break;
+            case 'May, 1924':
+                thisYearsParties = feature.properties.parties_1924a;
+                break;
+            case 'December, 1924':
+                thisYearsParties = feature.properties.parties_1924b;
+                break;
+            case 'May, 1928':
+                thisYearsParties = feature.properties.parties_1928;
+                break;
+            case 'September, 1930':
+                thisYearsParties = feature.properties.parties_1930;
+                break;
+            case 'July, 1932':
+                thisYearsParties = feature.properties.parties_1932a;
+                break;;    
+            case 'November, 1932':
+                thisYearsParties = feature.properties.parties_1932b;
+                break;
+            case 'March, 1933':
+                thisYearsParties = feature.properties.parties_1933;
+                break;
+        }
+
+        //set thisYearsPercents
+        let thisYearsPercents = null;
+        switch (selectedYear){
+            case 'June, 1920':
+                thisYearsPercents = feature.properties.percents_1920;
+                break;
+            case 'May, 1924':
+                thisYearsPercents = feature.properties.percents_1924a;
+                break;
+            case 'December, 1924':
+                thisYearsPercents = feature.properties.percents_1924b;
+                break;
+            case 'May, 1928':
+                thisYearsPercents = feature.properties.percents_1928;
+                break;
+            case 'September, 1930':
+                thisYearsPercents = feature.properties.percents_1930;
+                break;
+            case 'July, 1932':
+                thisYearsPercents = feature.properties.percents_1932a;
+                break;;    
+            case 'November, 1932':
+                thisYearsPercents = feature.properties.percents_1932b;
+                break;
+            case 'March, 1933':
+                thisYearsPercents = feature.properties.percents_1933;
+                break;
+        }
         
+        //set popup
         layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPerecents));
+        
         //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
             'color' : '#000000',
