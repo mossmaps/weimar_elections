@@ -101,18 +101,7 @@ var defaultStyle = {
 //add custom control
 L.control.custom({
     position: 'topleft',
-    content: <form method="get" action="/election_year.php">
-        <select name="election-year">
-            <option value="1920">June 1920</option>
-            <option value="1924a">May 1924</option>
-            <option value="1924b">December 1924</option>
-            <option value="1928">May 1928</option>
-            <option value="1930">September 1930</option>
-            <option value="1932a">July 1932</option>
-            <option value="1932b">November 1932</option>
-            <option value="1933">March 1933</option>
-        </select>
-    </form>
+    content: 'hello world'
 }
 ).addTo(map);
 
