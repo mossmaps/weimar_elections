@@ -202,13 +202,16 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
-        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, feature.properties.partiesArray, feature.properties.percentsArray));
+        //get the correct parties Array
+        let thisYearsParties = partiesArray;
+        let thisYearsPercents = percentsArray;
         
+        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPerecents));
         //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
             'color' : '#000000',
             'fill' : true,
-            'fillColor' : setColor(feature.properties.partiesArray[0]),
+            'fillColor' : setColor(feature.properties.thisYearsParties[0]),
             'fillOpacity' : 0.6
         }
 
