@@ -84,14 +84,7 @@ function setColor(winningParty){
     return winnersColor;
 }
 
-//Function to write and format text for the pop-up window.
-function popupBuild(date, district, partysArray, percentsArray){
-    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${partysArray[0]}: ${percentsArray[0]}%</strong><br>`;
-    for (let i = 1; i<partysArray.length; i++){
-        popupString = popupString + `${partysArray[i]}: ${percentsArray[i]}%<br>`
-    };
-    return popupString;
-}
+
 
 //set default style for geoJSON
 
@@ -129,7 +122,19 @@ var yearSelectorMenu = L.control.custom({
     selectedYear = select.value;
   }
 
-//add the electionResults geoJSON data to the map
+  //function to choose parties and percents arrays based on selectedYear
+
+
+//Function to write and format text for the pop-up window.
+function popupBuild(date, district, partysArray, percentsArray){
+    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${partysArray[0]}: ${percentsArray[0]}%</strong><br>`;
+    for (let i = 1; i<partysArray.length; i++){
+        popupString = popupString + `${partysArray[i]}: ${percentsArray[i]}%<br>`
+    };
+    return popupString;
+}
+
+  //add the electionResults geoJSON data to the map
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
