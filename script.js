@@ -130,7 +130,7 @@ yearSelectorMenu.addTo(map);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-//add the electionResults geoJSON data to the map, defaulting to 1920
+//add the electionResults geoJSON data to the map
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
@@ -193,7 +193,7 @@ L.geoJSON(electionResults, {
         }
         
         //set popup
-        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPerecents));
+        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
         
         //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
