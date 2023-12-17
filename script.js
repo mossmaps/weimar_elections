@@ -103,7 +103,7 @@ var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
     '<h1>Select Election</h1>' +
-    '<br><br>'+
+    '<br>'+
     '<select onchange="handleDropdownChange(this)">' +
       '<option value="1920">June, 1920</option>' +
       '<option value="1924a">May, 1924</option>' +
@@ -124,14 +124,13 @@ var yearSelectorMenu = L.control.custom({
   // Handle the dropdown menu change event
   function handleDropdownChange(select) {
     var selectedYear = select.value;
-    alert('Selected option: ' + selectedValue);
   }
 
 //add the electionResults geoJSON data to the map
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
-        layer.bindPopup(popupBuild(1920, feature.properties.engName, feature.properties.parties_1920, feature.properties.percents_1920));
+        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, feature.properties.parties_1920, feature.properties.percents_1920));
         
         //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
