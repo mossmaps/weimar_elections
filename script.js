@@ -85,6 +85,9 @@ function chooseData(year){
     } 
 }
 
+//run the initial chooseData function
+chooseData(selectedYear);
+
 //Function to set color based on winning party
 function setColor(winningParty){
     let winnersColor = ''
@@ -170,9 +173,6 @@ yearSelectorMenu.addTo(map);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-//run the initial chooseData function
-chooseData(selectedYear);
-
 //add the electionResults geoJSON data to the map, defaulting to 1920
 L.geoJSON(electionResults, {
     style: defaultStyle,
@@ -192,4 +192,4 @@ L.geoJSON(electionResults, {
 }).addTo(map)
 })
 
-//ON SELECTION IN THE MENU
+//ON USER SELECTING AN ELECTION TO VIEW
