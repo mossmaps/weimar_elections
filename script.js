@@ -211,7 +211,7 @@ L.geoJSON(electionResults, {
         var myStyle = {
             'color' : '#000000',
             'fill' : true,
-            'fillColor' : setColor(feature.properties.thisYearsParties[0]),
+            'fillColor' : setColor(thisYearsParties[0]),
             'fillOpacity' : 0.6
         }
 
