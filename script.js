@@ -45,41 +45,41 @@ var electionResults = {
 //define selectedYear as a global-scope variable, defaulting to 1920
 var selectedYear = 'June, 1920';
 
-//Function to set partysArray and percentsArray based on selectedYear
+//Function to set partiesArray and percentsArray based on selectedYear
 function chooseData(year){
-    let partysArray = null;
+    let partiesArray = null;
     let percentsArray = null;
     switch (selectedYear){
         case 'June, 1920':
-            partysArray = 'parties_1920';
+            partiesArray = 'parties_1920';
             percentsArray = 'percents_1920';
             break;
         case 'May, 1924':
-            partysArray = 'parties_1924a';
+            partiesArray = 'parties_1924a';
             percentsArray = 'percents_1924a';
             break;
         case 'December, 1924':
-            partysArray = 'parties_1924b';
+            partiesArray = 'parties_1924b';
             percentsArray = 'percents_1924b';
             break;
         case 'May, 1928':
-            partysArray = 'parties_1928';
+            partiesArray = 'parties_1928';
             percentsArray = 'percents_1928';
             break;
         case 'September, 1930':
-            partysArray = 'parties_1930';
+            partiesArray = 'parties_1930';
             percentsArray = 'percents_1930';
             break;
         case 'July, 1932':
-            partysArray = 'parties_1932a';
+            partiesArray = 'parties_1932a';
             percentsArray = 'percents_1932a';
             break;    
         case 'November, 1932':
-            partysArray = 'parties_1932b';
+            partiesArray = 'parties_1932b';
             percentsArray = 'percents_1932b';
             break;
         case 'March, 1933':
-            partysArray = 'parties_1933';
+            partiesArray = 'parties_1933';
             percentsArray = 'percents_1933';
             break;
     } 
@@ -119,10 +119,10 @@ function setColor(winningParty){
 }
 
 //Function to write and format text for the pop-up window.
-function popupBuild(date, district, partys, percents){
-    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${partys[0]}: ${percents[0]}%</strong><br>`;
-    for (let i = 1; i<partys.length; i++){
-        popupString = popupString + `${partys[i]}: ${percents[i]}%<br>`
+function popupBuild(date, district, parties, percents){
+    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
+    for (let i = 1; i<parties.length; i++){
+        popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
     };
     return popupString;
 }
@@ -174,13 +174,13 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
-        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, feature.properties.parties_1920, feature.properties.percents_1920));
+        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, feature.properties.partiesArray, feature.properties.percentsArray));
         
         //set fill color based on the 1920 winner of each district, using the setColor function
         var myStyle = {
             'color' : '#000000',
             'fill' : true,
-            'fillColor' : setColor(feature.properties.parties_1920[0]),
+            'fillColor' : setColor(feature.properties.partiesArray[0]),
             'fillOpacity' : 0.6
         }
 
