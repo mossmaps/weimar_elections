@@ -42,6 +42,9 @@ var electionResults = {
     ]
     }
 
+//define selectedYear as a global-scope variable, defaulting to 1920
+var selectedYear = 1920;
+    
 //Function to set color based on winning party
 function setColor(winningParty){
     let winnersColor = ''
