@@ -102,9 +102,16 @@ var defaultStyle = {
 var yearSelectorMenu = L.control.custom({
     position: 'topleft',
     content: '<div class="custom-control">' +
+    '<strong>Select Election</strong>' +
     '<select onchange="handleDropdownChange(this)">' +
-      '<option value="option1">Option 1</option>' +
-      '<option value="option2">Option 2</option>' +
+      '<option value="1920">June, 1920</option>' +
+      '<option value="1924a">May, 1924</option>' +
+      '<option value="1924b">December, 1924</option>' +
+      '<option value="1928">May, 1928</option>' +
+      '<option value="1930">September, 1930</option>' +
+      '<option value="1932a">July, 1932</option>' +
+      '<option value="1932b">November, 1932</option>' +
+      '<option value="1933">March, 1933</option>' +
       '</select>' +
       '</div>',
     classes: 'custom-control'
