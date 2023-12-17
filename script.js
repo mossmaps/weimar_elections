@@ -111,7 +111,7 @@ var yearSelectorMenu = L.control.custom({
   });
 
   // Add the custom control to the map
-  customControl.addTo(map);
+  yearSelectorMenu.addTo(map);
 
   // Handle the dropdown menu change event
   function handleDropdownChange(select) {
