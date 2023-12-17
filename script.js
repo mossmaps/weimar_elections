@@ -123,7 +123,7 @@ var yearSelectorMenu = L.control.custom({
 
   // Handle the dropdown menu change event
   function handleDropdownChange(select) {
-    var selectedValue = select.value;
+    var selectedYear = select.value;
     alert('Selected option: ' + selectedValue);
   }
 
