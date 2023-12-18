@@ -45,6 +45,9 @@ var electionResults = {
 //define selectedYear as a global-scope variable, defaulting to 1920
 var selectedYear = 'June, 1920';
 
+//define myStyle as a global variable
+var myStyle = null;
+
 //Function to set color based on winning party
 function setColor(winningParty){
     let winnersColor = ''
@@ -87,14 +90,14 @@ function popupBuild(date, district, parties, percents){
     return popupString;
 }
 
-//define default style for geoJSON
+//define style rules for GeoJSON
 var defaultStyle = {
     'color' : '#000000',
     'fill' : true,
     'fillColor' : '#999999'
 }
 
-  //declare the map
+//declare the map
 var map = L.map('map').setView([51.5, 11.25], 6);
 
 //add OSM tiles via the Provider plugin
@@ -165,14 +168,13 @@ var dataLayer = L.geoJSON(electionResults, {
         //set popup
         layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
         
-        //set fill color based on the 1920 winner of each district, using the setColor function
-        var myStyle = {
+        //set fill color based on winner, using the setColor function
+        myStyle = {
             'color' : '#000000',
             'fill' : true,
             'fillColor' : setColor(thisYearsParties[0]),
             'fillOpacity' : 0.6
         }
-
         layer.setStyle(myStyle)
     }
 }).addTo(map)
@@ -202,6 +204,6 @@ yearSelectorMenu.addTo(map);
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
-    selectedYear = select.value;
+    selectedYear = select.value;    
     dataLayer.setStyle(myStyle);
   }
