@@ -94,8 +94,6 @@ var defaultStyle = {
     'fillColor' : '#999999'
 }
 
-//ON LOAD
-document.addEventListener('DOMContentLoaded', function() {
   //declare the map
 var map = L.map('map').setView([51.5, 11.25], 6);
 
@@ -178,7 +176,6 @@ var dataLayer = L.geoJSON(electionResults, {
         layer.setStyle(myStyle)
     }
 }).addTo(map)
-})
 
 //define custom control
 var yearSelectorMenu = L.control.custom({
@@ -204,7 +201,6 @@ var yearSelectorMenu = L.control.custom({
 yearSelectorMenu.addTo(map);
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
-// Function for the dropdown menu change event
 function handleDropdownChange(select) {
     selectedYear = select.value;
     dataLayer.setStyle(myStyle);
