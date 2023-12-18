@@ -207,5 +207,5 @@ yearSelectorMenu.addTo(map);
 // Function for the dropdown menu change event
 function handleDropdownChange(select) {
     selectedYear = select.value;
-    dataLayer.resetStyle();
+    dataLayer.setStyle(myStyle);
   }
