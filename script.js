@@ -83,14 +83,14 @@ function setColor(winningParty){
 
 //Function to write and format text for the pop-up window.
 function popupBuild(date, district, parties, percents){
-    let popupString = `<strong>Election Rsults: ${date}<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
+    let popupString = `<strong>Election Results: ${date}<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
     for (let i = 1; i<parties.length; i++){
         popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
     };
     return popupString;
 }
 
-//define style rules for GeoJSON
+//define default style rules for GeoJSON
 var defaultStyle = {
     'color' : '#000000',
     'fill' : true,
@@ -204,6 +204,85 @@ yearSelectorMenu.addTo(map);
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
+    //reset selectedYear
     selectedYear = select.value;    
-    dataLayer.setStyle(myStyle);
+    
+    //remove dataLayer
+    map.removeLayer(dataLayer);
+
+    //add dataLayer
+    dataLayer = L.geoJSON(electionResults, {
+        style: defaultStyle,
+        onEachFeature: function (feature, layer){
+            //set thisYearsParties
+            let thisYearsParties = null;
+            switch (selectedYear){
+                case 'June, 1920':
+                    thisYearsParties = feature.properties.parties_1920;
+                    break;
+                case 'May, 1924':
+                    thisYearsParties = feature.properties.parties_1924a;
+                    break;
+                case 'December, 1924':
+                    thisYearsParties = feature.properties.parties_1924b;
+                    break;
+                case 'May, 1928':
+                    thisYearsParties = feature.properties.parties_1928;
+                    break;
+                case 'September, 1930':
+                    thisYearsParties = feature.properties.parties_1930;
+                    break;
+                case 'July, 1932':
+                    thisYearsParties = feature.properties.parties_1932a;
+                    break;;    
+                case 'November, 1932':
+                    thisYearsParties = feature.properties.parties_1932b;
+                    break;
+                case 'March, 1933':
+                    thisYearsParties = feature.properties.parties_1933;
+                    break;
+            }
+    
+            //set thisYearsPercents
+            let thisYearsPercents = null;
+            switch (selectedYear){
+                case 'June, 1920':
+                    thisYearsPercents = feature.properties.percents_1920;
+                    break;
+                case 'May, 1924':
+                    thisYearsPercents = feature.properties.percents_1924a;
+                    break;
+                case 'December, 1924':
+                    thisYearsPercents = feature.properties.percents_1924b;
+                    break;
+                case 'May, 1928':
+                    thisYearsPercents = feature.properties.percents_1928;
+                    break;
+                case 'September, 1930':
+                    thisYearsPercents = feature.properties.percents_1930;
+                    break;
+                case 'July, 1932':
+                    thisYearsPercents = feature.properties.percents_1932a;
+                    break;;    
+                case 'November, 1932':
+                    thisYearsPercents = feature.properties.percents_1932b;
+                    break;
+                case 'March, 1933':
+                    thisYearsPercents = feature.properties.percents_1933;
+                    break;
+            }
+            
+            //set popup
+            layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
+            
+            //set fill color based on winner, using the setColor function
+            myStyle = {
+                'color' : '#000000',
+                'fill' : true,
+                'fillColor' : setColor(thisYearsParties[0]),
+                'fillOpacity' : 0.6
+            }
+            layer.setStyle(myStyle)
+        }
+    }).addTo(map)
   }
