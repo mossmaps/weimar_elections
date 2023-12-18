@@ -80,7 +80,7 @@ function setColor(winningParty){
 
 //Function to write and format text for the pop-up window.
 function popupBuild(date, district, parties, percents){
-    let popupString = `<strong>${date} Election Results<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
+    let popupString = `<strong>Election Rsults: ${date}<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
     for (let i = 1; i<parties.length; i++){
         popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
     };
@@ -94,44 +94,16 @@ var defaultStyle = {
     'fillColor' : '#999999'
 }
 
-//define custom control
-var yearSelectorMenu = L.control.custom({
-    position: 'topright',
-    content: '<div class="custom-control">' +
-    '<h1>Select Election</h1>' +
-    '<br>'+
-    '<select onchange="handleDropdownChange(this)">' +
-      '<option value="June, 1920">June, 1920</option>' +
-      '<option value="May, 1924">May, 1924</option>' +
-      '<option value="December, 1924">December, 1924</option>' +
-      '<option value="May, 1928">May, 1928</option>' +
-      '<option value="September, 1930">September, 1930</option>' +
-      '<option value="July, 1932">July, 1932</option>' +
-      '<option value="November, 1932">November, 1932</option>' +
-      '<option value="March, 1933">March, 1933</option>' +
-      '</select>' +
-      '</div>',
-    classes: 'custom-control'
-  });
-
-// Function for the dropdown menu change event
-function handleDropdownChange(select) {
-    selectedYear = select.value;
-  }
-
 //ON LOAD
 document.addEventListener('DOMContentLoaded', function() {
   //declare the map
 var map = L.map('map').setView([51.5, 11.25], 6);
 
-// Add the custom control to the map
-yearSelectorMenu.addTo(map);
-
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add the electionResults geoJSON data to the map
-L.geoJSON(electionResults, {
+var dataLayer = L.geoJSON(electionResults, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
         //set thisYearsParties
@@ -208,4 +180,32 @@ L.geoJSON(electionResults, {
 }).addTo(map)
 })
 
-//ON USER SELECTING AN ELECTION TO VIEW
+//define custom control
+var yearSelectorMenu = L.control.custom({
+    position: 'topright',
+    content: '<div class="custom-control">' +
+    '<h1>Select Election</h1>' +
+    '<br>'+
+    '<select onchange="handleDropdownChange(this)">' +
+      '<option value="June, 1920">June, 1920</option>' +
+      '<option value="May, 1924">May, 1924</option>' +
+      '<option value="December, 1924">December, 1924</option>' +
+      '<option value="May, 1928">May, 1928</option>' +
+      '<option value="September, 1930">September, 1930</option>' +
+      '<option value="July, 1932">July, 1932</option>' +
+      '<option value="November, 1932">November, 1932</option>' +
+      '<option value="March, 1933">March, 1933</option>' +
+      '</select>' +
+      '</div>',
+    classes: 'custom-control'
+  });
+
+// Add the custom control to the map
+yearSelectorMenu.addTo(map);
+
+//RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
+// Function for the dropdown menu change event
+function handleDropdownChange(select) {
+    selectedYear = select.value;
+    dataLayer.resetStyle();
+  }
