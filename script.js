@@ -202,6 +202,16 @@ var yearSelectorMenu = L.control.custom({
 // Add the custom control to the map
 yearSelectorMenu.addTo(map);
 
+//Define sidepanel and add to map.
+const panelLeft = L.control.sidepanel('infoPanel', {
+    panelPosition: 'left',
+    hasTabs: false,
+    tabsPosition: 'top',
+    pushControls: true,
+    darkMode: true,
+    startTab: 'tab-5'
+  }).addTo(map);
+
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
     //reset selectedYear
