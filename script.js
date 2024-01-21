@@ -209,35 +209,33 @@ const panelLeft = L.control.sidepanel('infoPanel', {
     tabsPosition: 'top',
     pushControls: true,
     darkMode: true,
-    startTab: 'tab-5'
+    startTab: 'tab-5',
+    content: '<div id="infoPanel" class="sidepanel" aria-label="side panel" aria-hidden="false">' +
+    '<div class="sidepanel-inner-wrapper">'+
+      '<nav class="sidepanel-tabs-wrapper" aria-label="sidepanel tab navigation">'+
+        '<ul class="sidepanel-tabs">'+
+          '<li class="sidepanel-tab">'+
+            '<a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-1">'+
+              '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"  fill="currentColor">'+
+                '<path fill-rule="evenodd" />'+
+              '</svg>'+
+            '</a>'+
+          '</li>'+
+        '</ul>'+
+      '</nav>'+
+      '<div class="sidepanel-content-wrapper">'+
+        '<div class="sidepanel-content">'+
+          '<div class="sidepanel-tab-content" data-tab-content="tab-1">'+
+            '<p>Content 1.</p>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="sidepanel-toggle-container">'+
+      '<button class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>'+
+    '</div>'+
+  '</div>'
   }).addTo(map);
-
-  <div id="infoPanel" class="sidepanel" aria-label="side panel" aria-hidden="false">
-  <div class="sidepanel-inner-wrapper">
-    <nav class="sidepanel-tabs-wrapper" aria-label="sidepanel tab navigation">
-      <ul class="sidepanel-tabs">
-        <li class="sidepanel-tab">
-          <a href="#" class="sidebar-tab-link" role="tab" data-tab-link="tab-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"  fill="currentColor">
-              <path fill-rule="evenodd" />
-            </svg>
-          </a>
-        </li>
-        
-      </ul>
-    </nav>
-    <div class="sidepanel-content-wrapper">
-      <div class="sidepanel-content">
-        <div class="sidepanel-tab-content" data-tab-content="tab-1">
-          <p>Content 1.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="sidepanel-toggle-container">
-    <button class="sidepanel-toggle-button" type="button" aria-label="toggle side panel"></button>
-  </div>
-</div>
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
