@@ -213,8 +213,16 @@ var sidebar = L.control.sidebar({
 sidebar.addPanel({
     id: 'testContent',
     title: 'Test Content',
-    tab:  'question-mark.svg',
+    tab:  '<i class="fa-solid fa-book"></i>',
     pane: '<p>This is test content.</p>'
+});
+
+// Add credits panel to sidebar
+sidebar.addPanel({
+    id: 'Credits',
+    title: 'Credits',
+    tab: '<i class="fa-solid fa-signature"></i>',
+    pane: '<p>The credits go here.</p>'
 });
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
