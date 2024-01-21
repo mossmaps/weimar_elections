@@ -213,6 +213,7 @@ var sidebar = L.control.sidebar({
 sidebar.addPanel({
     id: 'testContent',
     title: 'Test Content',
+    tab:  '<i class="fa fa-gear"></i>',
     pane: '<p>This is test content.</p>'
 });
 
