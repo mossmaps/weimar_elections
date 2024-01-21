@@ -210,7 +210,7 @@ var sidebar = L.control.sidebar({
 }).addTo(map);
 
 // Add an empty content to the sidebar
-sidebar.setContent('');
+sidebar.setContent('test');
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
