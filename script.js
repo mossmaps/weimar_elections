@@ -213,7 +213,7 @@ var sidebar = L.control.sidebar({
 sidebar.addPanel({
     id: 'testContent',
     title: 'Test Content',
-    tab:  '<i class="fa-solid fa-book"></i>',
+    tab:  '<i class="fa-solid fa-book .icon-with-space"></i>',
     pane: '<p>This is test content.</p>'
 });
 
@@ -221,7 +221,7 @@ sidebar.addPanel({
 sidebar.addPanel({
     id: 'Credits',
     title: 'Credits',
-    tab: '<i class="fa-solid fa-signature"></i>',
+    tab: '<i class="fa-solid fa-signature .icon-with-space"></i>',
     pane: '<p>The credits go here.</p>'
 });
 
