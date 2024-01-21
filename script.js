@@ -209,8 +209,12 @@ var sidebar = L.control.sidebar({
     container: 'sidebar'  // the HTML container ID
 }).addTo(map);
 
-// Add an empty content to the sidebar
-sidebar.setContent('test');
+// Add test content to the sidebar
+sidebar.addPanel({
+    id: 'testContent',
+    title: 'Test Content',
+    pane: '<p>This is test content.</p>'
+});
 
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
