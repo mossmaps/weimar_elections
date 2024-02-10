@@ -261,7 +261,7 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data to map
-loadData();
+map.on('load', loadData);
 
 //define custom control
 var yearSelectorMenu = L.control.custom({
