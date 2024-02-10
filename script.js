@@ -221,13 +221,13 @@ sidebar.addPanel({
 //RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
 function handleDropdownChange(select) {
     //reset selectedYear
-    selectedYear = select.value;    
+    var newSelectedYear = select.value;    
     
     //remove dataLayer
     map.removeLayer(dataLayer);
 
     //add dataLayer, with a switch for 1919 vs all others
-    if (selectedYear = "January, 1919") {
+    if (newSelectedYear = "January, 1919") {
         dataLayer = L.geoJSON(electionResults_1919, {
             style: defaultStyle,
             onEachFeature: function (feature, layer){
@@ -256,7 +256,7 @@ function handleDropdownChange(select) {
         onEachFeature: function (feature, layer){
             //set thisYearsParties
             let thisYearsParties = null;
-            switch (selectedYear){
+            switch (newSelectedYear){
                 case 'June, 1920':
                     thisYearsParties = feature.properties.parties_1920;
                     break;
@@ -285,7 +285,7 @@ function handleDropdownChange(select) {
     
             //set thisYearsPercents
             let thisYearsPercents = null;
-            switch (selectedYear){
+            switch (newSelectedYear){
                 case 'June, 1920':
                     thisYearsPercents = feature.properties.percents_1920;
                     break;
@@ -313,7 +313,7 @@ function handleDropdownChange(select) {
             }
             
             //set popup
-            layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
+            layer.bindPopup(popupBuild(newSelectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
             
             //set fill color based on winner, using the setColor function
             myStyle = {
