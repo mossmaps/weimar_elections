@@ -93,7 +93,7 @@ var selectedYear = 'January, 1919';
 var myStyle = null;
 
 //define dataLayer as a global variable
-var dataLayer = null;
+var dataLayer;
 
 //Function to set color based on winning party
 function setColor(winningParty){
