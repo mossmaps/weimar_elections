@@ -90,10 +90,7 @@ var electionResults = {
 var selectedYear = 'January, 1919';
 
 //define myStyle as a global variable
-var myStyle;
-
-//define dataLayer as a global variable
-var dataLayer;
+var myStyle = null;
 
 //Function to set color based on winning party
 function setColor(winningParty){
@@ -147,7 +144,7 @@ var defaultStyle = {
 //define function to load data
 function loadData (){
     if (selectedYear == "January, 1919") {
-        dataLayer = L.geoJSON(electionResults_1919, {
+        var dataLayer = L.geoJSON(electionResults_1919, {
             style: defaultStyle,
             onEachFeature: function (feature, layer){
                 //set thisYearsParties
@@ -170,7 +167,7 @@ function loadData (){
             }
         }).addTo(map)    
     } else {  
-        dataLayer = L.geoJSON(electionResults, {
+        var dataLayer = L.geoJSON(electionResults, {
         style: defaultStyle,
         onEachFeature: function (feature, layer){
             //set thisYearsParties
