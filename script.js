@@ -172,7 +172,7 @@ function loadData (){
         onEachFeature: function (feature, layer){
             //set thisYearsParties
             let thisYearsParties = null;
-            switch (selectedYearelectedYear){
+            switch (selectedYear){
                 case 'June, 1920':
                     thisYearsParties = feature.properties.parties_1920;
                     break;
