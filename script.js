@@ -228,7 +228,7 @@ function handleDropdownChange(select) {
 
     //add dataLayer, with a switch for 1919 vs all others
     if (selectedYear = "January, 1919") {
-        var dataLayer = L.geoJSON(electionResults_1919, {
+        dataLayer = L.geoJSON(electionResults_1919, {
             style: defaultStyle,
             onEachFeature: function (feature, layer){
                 //set thisYearsParties
