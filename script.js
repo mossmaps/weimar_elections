@@ -90,10 +90,10 @@ var electionResults = {
 var selectedYear = 'January, 1919';
 
 //define myStyle as a global variable
-var myStyle = 0;
+var myStyle;
 
 //define dataLayer as a global variable
-var dataLayer = 0;
+var dataLayer;
 
 //Function to set color based on winning party
 function setColor(winningParty){
@@ -146,7 +146,7 @@ var defaultStyle = {
 
 //define function to load data
 function loadData (){
-    if (selectedYear = "January, 1919") {
+    if (selectedYear == "January, 1919") {
         dataLayer = L.geoJSON(electionResults_1919, {
             style: defaultStyle,
             onEachFeature: function (feature, layer){
@@ -175,7 +175,7 @@ function loadData (){
         onEachFeature: function (feature, layer){
             //set thisYearsParties
             let thisYearsParties = null;
-            switch (newSelectedYear){
+            switch (selectedYearelectedYear){
                 case 'June, 1920':
                     thisYearsParties = feature.properties.parties_1920;
                     break;
@@ -204,7 +204,7 @@ function loadData (){
     
             //set thisYearsPercents
             let thisYearsPercents = null;
-            switch (newSelectedYear){
+            switch (selectedYear){
                 case 'June, 1920':
                     thisYearsPercents = feature.properties.percents_1920;
                     break;
@@ -232,7 +232,7 @@ function loadData (){
             }
             
             //set popup
-            layer.bindPopup(popupBuild(newSelectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
+            layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
             
             //set fill color based on winner, using the setColor function
             myStyle = {
