@@ -100,22 +100,22 @@ function setColor(winningParty){
     let winnersColor = ''
     switch (winningParty){
         case 'USPD':
-            winnersColor = '#ff9999';
+            winnersColor = '#ffff33';
             break;
         case 'KPD':
-            winnersColor = '#ff00ff';
+            winnersColor = '#cc0000';
             break;
         case 'SPD':
-            winnersColor = '#ff0000';
+            winnersColor = '#ff9999';
             break;
         case 'Zentrum/BVP':
-            winnersColor = '#99ccff';
+            winnersColor = '#000000';
             break;
         case 'DVP':
-            winnersColor = '#00cc33';
+            winnersColor = '#9999ff';
             break;
         case 'DNVP':
-            winnersColor = '#cc6600';
+            winnersColor = '#000099';
             break;
         case 'NSDAP':
             winnersColor = "#663300";
