@@ -90,7 +90,7 @@ var electionResults = {
 var selectedYear = 'January, 1919';
 
 //define myStyle as a global variable
-var myStyle = null;
+var myStyle;
 
 //define dataLayer as a global variable
 var dataLayer;
