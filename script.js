@@ -178,16 +178,17 @@ var yearSelectorMenu = L.control.custom({
     '<h1>Select Election</h1>' +
     '<br>'+
     '<select onchange="handleDropdownChange(this)">' +
-      '<option value="June, 1920">June, 1920</option>' +
-      '<option value="May, 1924">May, 1924</option>' +
-      '<option value="December, 1924">December, 1924</option>' +
-      '<option value="May, 1928">May, 1928</option>' +
-      '<option value="September, 1930">September, 1930</option>' +
-      '<option value="July, 1932">July, 1932</option>' +
-      '<option value="November, 1932">November, 1932</option>' +
-      '<option value="March, 1933">March, 1933</option>' +
-      '</select>' +
-      '</div>',
+        '<option value="January, 1919">January, 1919</option>' +  
+        '<option value="June, 1920">June, 1920</option>' +
+        '<option value="May, 1924">May, 1924</option>' +
+        '<option value="December, 1924">December, 1924</option>' +
+        '<option value="May, 1928">May, 1928</option>' +
+        '<option value="September, 1930">September, 1930</option>' +
+        '<option value="July, 1932">July, 1932</option>' +
+        '<option value="November, 1932">November, 1932</option>' +
+        '<option value="March, 1933">March, 1933</option>' +
+    '</select>' +
+    '</div>',
     classes: 'custom-control'
   });
 
@@ -225,8 +226,32 @@ function handleDropdownChange(select) {
     //remove dataLayer
     map.removeLayer(dataLayer);
 
-    //add dataLayer
-    dataLayer = L.geoJSON(electionResults, {
+    //add dataLayer, with a switch for 1919 vs all others
+    if (selectedYear = "January, 1919") {
+        var dataLayer = L.geoJSON(electionResults_1919, {
+            style: defaultStyle,
+            onEachFeature: function (feature, layer){
+                //set thisYearsParties
+                let thisYearsParties = feature.properties.parties_1919;
+        
+                //set thisYearsPercents
+                let thisYearsPercents = feature.properties.percents_1919;
+                
+                //set popup
+                layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
+                
+                //set fill color based on winner, using the setColor function
+                myStyle = {
+                    'color' : '#000000',
+                    'fill' : true,
+                    'fillColor' : setColor(thisYearsParties[0]),
+                    'fillOpacity' : 0.6
+                }
+                layer.setStyle(myStyle)
+            }
+        }).addTo(map)    
+    } else {  
+        dataLayer = L.geoJSON(electionResults, {
         style: defaultStyle,
         onEachFeature: function (feature, layer){
             //set thisYearsParties
@@ -298,6 +323,5 @@ function handleDropdownChange(select) {
                 'fillOpacity' : 0.6
             }
             layer.setStyle(myStyle)
-        }
-    }).addTo(map)
-  }
+        }}
+    ).addTo(map)}}
