@@ -147,7 +147,7 @@ var defaultStyle = {
 //define function to load data
 function loadData (){
     if (selectedYear == "January, 1919") {
-        var dataLayer = L.geoJSON(electionResults_1919, {
+        dataLayer = L.geoJSON(electionResults_1919, {
             style: defaultStyle,
             onEachFeature: function (feature, layer){
                 //set thisYearsParties
@@ -170,7 +170,7 @@ function loadData (){
             }
         }).addTo(map)    
     } else {  
-        var dataLayer = L.geoJSON(electionResults, {
+        dataLayer = L.geoJSON(electionResults, {
         style: defaultStyle,
         onEachFeature: function (feature, layer){
             //set thisYearsParties
@@ -264,7 +264,7 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data to map
-map.on('load', loadData);
+map.on('load', loadData());
 
 //define custom control
 var yearSelectorMenu = L.control.custom({
