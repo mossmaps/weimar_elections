@@ -86,8 +86,8 @@ var electionResults = {
     ]
     };
 
-//define selectedYear as a global-scope variable, defaulting to 1920
-var selectedYear = 'June, 1920';
+//define selectedYear as a global-scope variable, defaulting to 1919
+var selectedYear = 'January, 1919';
 
 //define myStyle as a global variable
 var myStyle = null;
@@ -147,67 +147,15 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-//add the electionResults geoJSON data to the map
-var dataLayer = L.geoJSON(electionResults, {
+//add the 1919 electionResults geoJSON data to the map
+var dataLayer = L.geoJSON(electionResults_1919, {
     style: defaultStyle,
     onEachFeature: function (feature, layer){
         //set thisYearsParties
-        let thisYearsParties = null;
-        switch (selectedYear){
-            case 'June, 1920':
-                thisYearsParties = feature.properties.parties_1920;
-                break;
-            case 'May, 1924':
-                thisYearsParties = feature.properties.parties_1924a;
-                break;
-            case 'December, 1924':
-                thisYearsParties = feature.properties.parties_1924b;
-                break;
-            case 'May, 1928':
-                thisYearsParties = feature.properties.parties_1928;
-                break;
-            case 'September, 1930':
-                thisYearsParties = feature.properties.parties_1930;
-                break;
-            case 'July, 1932':
-                thisYearsParties = feature.properties.parties_1932a;
-                break;;    
-            case 'November, 1932':
-                thisYearsParties = feature.properties.parties_1932b;
-                break;
-            case 'March, 1933':
-                thisYearsParties = feature.properties.parties_1933;
-                break;
-        }
+        let thisYearsParties = feature.properties.parties_1919;
 
         //set thisYearsPercents
-        let thisYearsPercents = null;
-        switch (selectedYear){
-            case 'June, 1920':
-                thisYearsPercents = feature.properties.percents_1920;
-                break;
-            case 'May, 1924':
-                thisYearsPercents = feature.properties.percents_1924a;
-                break;
-            case 'December, 1924':
-                thisYearsPercents = feature.properties.percents_1924b;
-                break;
-            case 'May, 1928':
-                thisYearsPercents = feature.properties.percents_1928;
-                break;
-            case 'September, 1930':
-                thisYearsPercents = feature.properties.percents_1930;
-                break;
-            case 'July, 1932':
-                thisYearsPercents = feature.properties.percents_1932a;
-                break;;    
-            case 'November, 1932':
-                thisYearsPercents = feature.properties.percents_1932b;
-                break;
-            case 'March, 1933':
-                thisYearsPercents = feature.properties.percents_1933;
-                break;
-        }
+        let thisYearsPercents = feature.properties.percents_1919;
         
         //set popup
         layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
