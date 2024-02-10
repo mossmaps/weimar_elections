@@ -147,30 +147,6 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-//add the 1919 electionResults geoJSON data to the map
-var dataLayer = L.geoJSON(electionResults_1919, {
-    style: defaultStyle,
-    onEachFeature: function (feature, layer){
-        //set thisYearsParties
-        let thisYearsParties = feature.properties.parties_1919;
-
-        //set thisYearsPercents
-        let thisYearsPercents = feature.properties.percents_1919;
-        
-        //set popup
-        layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
-        
-        //set fill color based on winner, using the setColor function
-        myStyle = {
-            'color' : '#000000',
-            'fill' : true,
-            'fillColor' : setColor(thisYearsParties[0]),
-            'fillOpacity' : 0.6
-        }
-        layer.setStyle(myStyle)
-    }
-}).addTo(map)
-
 //define custom control
 var yearSelectorMenu = L.control.custom({
     position: 'topright',
@@ -218,16 +194,9 @@ sidebar.addPanel({
     pane: '<p>The credits go here.</p>'
 });
 
-//RESET THE GEOJSON WHEN A MENU OPTION IS CHANGED
-function handleDropdownChange(select) {
-    //reset selectedYear
-    var newSelectedYear = select.value;    
-    
-    //remove dataLayer
-    map.removeLayer(dataLayer);
-
-    //add dataLayer, with a switch for 1919 vs all others
-    if (newSelectedYear = "January, 1919") {
+//function to load data
+function loadData (){
+    if (selectedYear = "January, 1919") {
         dataLayer = L.geoJSON(electionResults_1919, {
             style: defaultStyle,
             onEachFeature: function (feature, layer){
@@ -325,3 +294,20 @@ function handleDropdownChange(select) {
             layer.setStyle(myStyle)
         }}
     ).addTo(map)}}
+
+//trigger loadData when the page opens
+document.on('DOMContentLoaded', function(){
+    loadData();
+})
+
+//reset the data when user selects a new year
+function handleDropdownChange(select) {
+    //reset selectedYear
+    selectedYear = select.value;    
+    
+    //remove old dataLayer
+    map.removeLayer(dataLayer);
+
+    //load new dataLayer
+    loadData()
+}
