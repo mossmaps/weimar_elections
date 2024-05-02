@@ -360,8 +360,8 @@ function handleDropdownChange(select) {
     loadData()
 
     //remove old panels
-    sidebar.removePanel(narrativePanel);
-    sidebar.removePanel(creditsPanel);
+    sidebar.remove(narrativePanel);
+    sidebar.remove(creditsPanel);
 
     //build new narrative panel
     buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear)));
