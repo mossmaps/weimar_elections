@@ -245,6 +245,109 @@ function loadData (){
         }}
     ).addTo(map)}}
 
+//define function to set the narrative panel's title
+function setNarrativeTitle (date){
+    var narrativeYear = date;
+    var narrativeTitle = '';
+    switch (narrativeYear){
+        case 'January, 1919':
+            narrativeTitle = 'The Election of 1919';
+            break;
+        case 'June, 1920':
+            narrativeTitle = 'The Election of 1920';
+            break;
+        case 'May, 1924':
+            narrativeTitle = 'The Election of May 1924';
+            break;
+        case 'December, 1924':
+            narrativeTitle = 'The Election of December 1924';
+            break;
+        case 'May, 1928':
+            narrativeTitle = 'The Election of 1928';
+            break;
+        case 'September, 1930':
+            narrativeTitle = 'The Election of 1930';
+            break;
+        case 'July, 1932':
+            narrativeTitle = 'The Election of July 1932';
+            break;
+        case 'November, 1932':
+            narrativeTitle = 'The Election of November 1932';
+            break;
+        case 'March, 1933':
+            narrativeTitle = 'The Election of 1933';
+            break;
+    }
+
+    return narrativeTitle;
+};
+
+//define function to set the narrative panel's content
+function setNarrativeContent (date){
+    var narrativeYear = date;
+    var narrativeContent = '';
+
+    switch (narrativeYear){
+        case 'January, 1919':
+            narrativeContent = 'It is 1919';
+            break;
+        case 'June, 1920':
+            narrativeContent = 'It is 1920';
+            break;
+        case 'May, 1924':
+            narrativeContent = 'It is May 1924';
+            break;
+        case 'December, 1924':
+            narrativeContent = 'It is December 1924';
+            break;
+        case 'May, 1928':
+            narrativeContent = 'It is 1928';
+            break;
+        case 'September, 1930':
+            narrativeContent = 'It is 1930';
+            break;
+        case 'July, 1932':
+            narrativeContent = 'It is July 1932';
+            break;
+        case 'November, 1932':
+            narrativeContent = 'It is November 1932';
+            break;
+        case 'March, 1933':
+            narrativeContent = 'It is 1933';
+            break;
+    }
+    
+    return narrativeContent;
+} ;
+
+//define function to create narrative panel
+function buildNarrativePanel (narrativeTitle, narrativeContent){
+    narrativePanel = {
+        id: 'narrative',
+        title: narrativeTitle,
+        tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
+        pane: narrativeContent
+    }
+
+    return narrativePanel
+};
+
+//declare credits panel
+var creditsPanel = {
+    id: 'Credits',
+    title: 'Credits',
+    tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
+    pane: '<p>The credits go here.</p>'
+}
+
+//define function to add panes to sidepanel
+function buildSidepanel (narrativePanel){
+    sidebar.addPanel(narrativePanel);
+    sidebar.addPanel(creditsPanel);
+
+    return sidebar
+};
+
 //define the handleDropdownChange function
 function handleDropdownChange(select) {
     //reset selectedYear
@@ -255,6 +358,13 @@ function handleDropdownChange(select) {
 
     //load new dataLayer
     loadData()
+
+    //remove old panels
+    sidebar.removePanel(narrativePanel);
+    sidebar.removePanel(creditsPanel);
+
+    //build new narrative panel
+    buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear)));
 }
 
 //declare the map
@@ -263,10 +373,20 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
+//declare the sidepanel and add to map
+var sidebar = L.control.sidebar({
+    autopan: true,       // whether to pan the map when opening the sidebar
+    closeButton: true,    // whether to add a close button to the sidebar
+    container: 'sidebar'  // the HTML container ID
+}).addTo(map);
+
 //add initial data to map
 map.on('load', loadData());
 
-//define custom control
+//add initial panes to sidepanel to map
+map.on('load', buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear))))
+
+//declare custom control
 var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
@@ -289,26 +409,3 @@ var yearSelectorMenu = L.control.custom({
 
 // Add the custom control to the map
 yearSelectorMenu.addTo(map);
-
-//Define sidepanel and add to map.
-var sidebar = L.control.sidebar({
-    autopan: true,       // whether to pan the map when opening the sidebar
-    closeButton: true,    // whether to add a close button to the sidebar
-    container: 'sidebar'  // the HTML container ID
-}).addTo(map);
-
-// Add test content to the sidebar
-sidebar.addPanel({
-    id: 'testContent',
-    title: 'Test Content',
-    tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
-    pane: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris. Ipsum a arcu cursus vitae congue. Elementum nisi quis eleifend quam. Vitae semper quis lectus nulla at volutpat. Libero nunc consequat interdum varius sit amet mattis. Nunc congue nisi vitae suscipit tellus mauris a diam. Egestas sed tempus urna et. Eget mi proin sed libero enim sed. Massa tempor nec feugiat nisl. Orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Convallis a cras semper auctor neque vitae tempus. Ac turpis egestas maecenas pharetra. Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque. Suspendisse potenti nullam ac tortor vitae. Odio facilisis mauris sit amet massa vitae tortor condimentum. Ut lectus arcu bibendum at varius vel pharetra vel turpis. Ornare aenean euismod elementum nisi quis eleifend quam. Ligula ullamcorper malesuada proin libero nunc. Vestibulum sed arcu non odio euismod lacinia at. Integer vitae justo eget magna fermentum iaculis eu. Nullam eget felis eget nunc lobortis mattis. Platea dictumst quisque sagittis purus sit amet. Cras pulvinar mattis nunc sed blandit libero. Volutpat consequat mauris nunc congue nisi. Diam maecenas sed enim ut sem viverra. Turpis egestas sed tempus urna et. Sed elementum tempus egestas sed sed risus pretium quam vulputate. In massa tempor nec feugiat nisl. Leo vel orci porta non pulvinar neque. Consectetur purus ut faucibus pulvinar elementum integer.  Vel pretium lectus quam id leo in vitae turpis. Faucibus scelerisque eleifend donec pretium. Non quam lacus suspendisse faucibus interdum posuere. Magna sit amet purus gravida quis blandit turpis cursus in. Dolor sit amet consectetur adipiscing elit ut aliquam purus sit. Aliquam faucibus purus in massa tempor nec feugiat. Eros in cursus turpis massa tincidunt dui ut ornare lectus. Nisl condimentum id venenatis a condimentum vitae sapien pellentesque habitant. Ut etiam sit amet nisl. Pellentesque dignissim enim sit amet venenatis urna cursus. Vitae ultricies leo integer malesuada nunc vel. Cras ornare arcu dui vivamus arcu felis bibendum ut tristique. Quis blandit turpis cursus in hac habitasse.Feugiat nisl pretium fusce id velit. Diam ut venenatis tellus in metus vulputate. Nulla pellentesque dignissim enim sit. In fermentum posuere urna nec tincidunt praesent. Facilisi etiam dignissim diam quis enim lobortis. Ut faucibus pulvinar elementum integer enim neque volutpat. Lectus proin nibh nisl condimentum id venenatis a condimentum vitae. Amet risus nullam eget felis eget nunc. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Molestie at elementum eu facilisis sed odio morbi quis.</p>'
-});
-
-// Add credits panel to sidebar
-sidebar.addPanel({
-    id: 'Credits',
-    title: 'Credits',
-    tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
-    pane: '<p>The credits go here.</p>'
-});
