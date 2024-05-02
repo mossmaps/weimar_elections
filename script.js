@@ -334,7 +334,7 @@ function buildNarrativePanel (narrativeTitle, narrativeContent){
 
 //declare credits panel
 var creditsPanel = {
-    id: 'Credits',
+    id: 'credits',
     title: 'Credits',
     tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
     pane: '<p>The credits go here.</p>'
@@ -344,7 +344,6 @@ var creditsPanel = {
 function buildSidepanel (narrativePanel){
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
-
     return sidebar
 };
 
@@ -366,14 +365,12 @@ function handleDropdownChange(select) {
     //load new dataLayer
     loadData()
 
-    //remove old sidebar
-    map.removeControl(sidebar);
+    //remove old panels
+    sidebar.removePanel('narrative');
+    sidebar.removePanel('credits');
 
     //build new sidepanel
     buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear)));
-
-    //add new sidepanel to map
-    sidebar.addTo(map);
 }
 
 //declare the map
