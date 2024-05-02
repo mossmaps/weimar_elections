@@ -372,6 +372,9 @@ function handleDropdownChange(select) {
 
     //build new sidebar
     buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear)));
+
+    //add new sidepanel to map
+    sidebar.addTo(map);
 }
 
 //declare the map
