@@ -367,7 +367,7 @@ function handleDropdownChange(select) {
     loadData()
 
     //remove old sidepanel
-    map.remove(sidebar);
+    sidebar.remove();
 
     //build new sidebar
     buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear)));
