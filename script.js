@@ -348,6 +348,13 @@ function buildSidepanel (narrativePanel){
     return sidebar
 };
 
+//declare the sidepanel
+var sidebar = L.control.sidebar({
+    autopan: true,       // whether to pan the map when opening the sidebar
+    closeButton: true,    // whether to add a close button to the sidebar
+    container: 'sidebar'  // the HTML container ID
+});
+
 //define the handleDropdownChange function
 function handleDropdownChange(select) {
     //reset selectedYear
@@ -359,7 +366,7 @@ function handleDropdownChange(select) {
     //load new dataLayer
     loadData()
 
-    //remove old panels
+    //remove old sidepanel
     sidebar.remove(narrativePanel);
     sidebar.remove(creditsPanel);
 
@@ -373,17 +380,13 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-//declare the sidepanel and add to map
-var sidebar = L.control.sidebar({
-    autopan: true,       // whether to pan the map when opening the sidebar
-    closeButton: true,    // whether to add a close button to the sidebar
-    container: 'sidebar'  // the HTML container ID
-}).addTo(map);
-
 //add initial data to map
 map.on('load', loadData());
 
-//add initial panes to sidepanel to map
+//add initial sidepanel to map
+map.on('load', sidebar.addTo(map));
+
+//add initial panes to sidepanel
 map.on('load', buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear))))
 
 //declare custom control
