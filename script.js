@@ -86,6 +86,56 @@ var electionResults = {
     ]
     };
 
+//create an object to hold sidebar text and titles
+
+var sidebarContent = {
+    jan_19: {
+        sidebarTitle: 'The Election of 1919',
+        sidebarText: "It is 1919.",
+        sidebarImage: null
+    },
+    jun_20: {
+        sidebarTitle: 'The Election of 1920',
+        sidebarText: "It is 1920.",
+        sidebarImage: null
+    },
+    may_24: {
+        sidebarTitle: 'The Election of May, 1924',
+        sidebarText: "It is May 1924.",
+        sidebarImage: null
+    },
+    dec_24: {
+        sidebarTitle: 'The Election of December, 1924',
+        sidebarText: "It is December 1924.",
+        sidebarImage: null
+    },
+    may_28: {
+        sidebarTitle: 'The Election of 1928',
+        sidebarText: "It is 1928.",
+        sidebarImage: null
+    },
+    sep_30: {
+        sidebarTitle: 'The Election of 1930',
+        sidebarText: "It is 1930.",
+        sidebarImage: null
+    },
+    jul_32: {
+        sidebarTitle: 'The Election of July, 1932',
+        sidebarText: "It is July 1932.",
+        sidebarImage: null
+    },
+    nov_32: {
+        sidebarTitle: 'The Election of November, 1932',
+        sidebarText: "It is November 1932.",
+        sidebarImage: null
+    },
+    mar_33: {
+        sidebarTitle: 'The Election of 1933',
+        sidebarText: "It is 1933.",
+        sidebarImage: null
+    }
+};
+
 //define selectedYear as a global-scope variable, defaulting to 1919
 var selectedYear = 'January, 1919';
 
@@ -245,94 +295,57 @@ function loadData (){
         }}
     ).addTo(map)}}
 
-//define function to set the narrative panel's title
-function setNarrativeTitle (date){
-    var narrativeYear = date;
-    var narrativeTitle = '';
-    switch (narrativeYear){
+//define function to populate narrative pane based on selected year and the sidebarContent object
+function buildNarrativePanel (date){
+    var targetObject = null;
+
+    switch (date){
         case 'January, 1919':
-            narrativeTitle = 'The Election of 1919';
+            targetObject = sidebarContent.jan_19;
             break;
         case 'June, 1920':
-            narrativeTitle = 'The Election of 1920';
+            targetObject = sidebarContent.jun_20;
             break;
         case 'May, 1924':
-            narrativeTitle = 'The Election of May 1924';
+            targetObject = sidebarContent.may_24;
             break;
         case 'December, 1924':
-            narrativeTitle = 'The Election of December 1924';
+            targetObject = sidebarContent.dec_24;
             break;
         case 'May, 1928':
-            narrativeTitle = 'The Election of 1928';
+            targetObject = sidebarContent.may_28;
             break;
         case 'September, 1930':
-            narrativeTitle = 'The Election of 1930';
+            targetObject = sidebarContent.sep_30;
             break;
         case 'July, 1932':
-            narrativeTitle = 'The Election of July 1932';
+            targetObject = sidebarContent.jul_32;
             break;
         case 'November, 1932':
-            narrativeTitle = 'The Election of November 1932';
+            targetObject = sidebarContent.nov_32;
             break;
         case 'March, 1933':
-            narrativeTitle = 'The Election of 1933';
-            break;
-    }
-
-    return narrativeTitle;
-};
-
-//define function to set the narrative panel's content
-function setNarrativeContent (date){
-    var narrativeYear = date;
-    var narrativeContent = '';
-
-    switch (narrativeYear){
-        case 'January, 1919':
-            narrativeContent = 'It is 1919';
-            break;
-        case 'June, 1920':
-            narrativeContent = 'It is 1920';
-            break;
-        case 'May, 1924':
-            narrativeContent = 'It is May 1924';
-            break;
-        case 'December, 1924':
-            narrativeContent = 'It is December 1924';
-            break;
-        case 'May, 1928':
-            narrativeContent = 'It is 1928';
-            break;
-        case 'September, 1930':
-            narrativeContent = 'It is 1930';
-            break;
-        case 'July, 1932':
-            narrativeContent = 'It is July 1932';
-            break;
-        case 'November, 1932':
-            narrativeContent = 'It is November 1932';
-            break;
-        case 'March, 1933':
-            narrativeContent = 'It is 1933';
+            targetObject = sidebarContent.mar_33;
             break;
     }
     
-    return narrativeContent;
-} ;
-
-//define function to create narrative panel
-function buildNarrativePanel (narrativeTitle, narrativeContent){
+    var narrativeTitle = targetObject.sidebarTitle;
+    var narrativeContent = targetObject.sidebarText;
+    var narrativeImage = targetObject.sidebarImage;
+    
     narrativePanel = {
         id: 'narrative',
         title: narrativeTitle,
         tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
-        pane: narrativeContent
+        pane: narrativeContent,
+        image: narrativeImage
     }
 
     return narrativePanel
 };
 
-//declare credits panel
+
+//declare credits pane
 var creditsPanel = {
     id: 'credits',
     title: 'Credits',
@@ -347,7 +360,7 @@ function buildSidepanel (narrativePanel){
     return sidebar
 };
 
-//declare the sidepanel
+//declare the sidebar
 var sidebar = L.control.sidebar({
     autopan: true,       // whether to pan the map when opening the sidebar
     closeButton: true,    // whether to add a close button to the sidebar
@@ -365,12 +378,12 @@ function handleDropdownChange(select) {
     //load new dataLayer
     loadData()
 
-    //remove old panels
+    //remove old panes
     sidebar.removePanel('narrative');
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    buildSidepanel(buildNarrativePanel(setNarrativeTitle(selectedYear), setNarrativeContent(selectedYear)));
+    buildSidepanel(buildNarrativePanel(selectedYear));
 }
 
 //declare the map
