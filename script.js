@@ -337,8 +337,8 @@ function buildNarrativePanel (date){
     var narrativeContent = document.createElement('div');
 
     //create content template for narrative panel
-    var contentTemplate = '<h1>%title%</h1><br><p>%text%</p>';
-    var htmlContent = contentTemplate.replace('%title%', narrativeTitle).replace('%text%', narrativeText);
+    var contentTemplate = '<h1>%title%</h1><br><img src=%source%><br><p>%text%</p>';
+    var htmlContent = contentTemplate.replace('%title%', narrativeTitle).replace('%source%', narrativeImage).replace('%text%', narrativeText);
     
     narrativeContent.innerHTML = htmlContent;
     
