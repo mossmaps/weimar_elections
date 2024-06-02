@@ -92,7 +92,7 @@ var sidebarContent = {
     jan_19: {
         sidebarTitle: 'The Election of 1919',
         sidebarText: "It is 1919.",
-        sidebarImage: null
+        sidebarImage: './images/1919.png'
     },
     jun_20: {
         sidebarTitle: 'The Election of 1920',
