@@ -344,7 +344,6 @@ function buildNarrativePanel (date){
     
     narrativePanel = {
         id: 'narrative',
-        title: narrativeTitle,
         tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
         pane: narrativeContent
     }
