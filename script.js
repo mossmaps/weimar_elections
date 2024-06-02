@@ -334,17 +334,14 @@ function buildNarrativePanel (date){
     var narrativeImage = targetObject.sidebarImage;
 
     //set HTML of narrative Content using narrativeText and narrativeImage
-    var narrativeContent = null;
-    narrativeContent.innerHTML = '<img src= narrativeImage><br><p>narrativeText</p>'
-
-
+    var narrativeContent = 0;
+    narrativeContent.innerHTML = '<img src= narrativeImage><br><p>narrativeText</p>';
     
     narrativePanel = {
         id: 'narrative',
         title: narrativeTitle,
         tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
-        pane: narrativeContent,
-        image: narrativeImage
+        pane: narrativeContent
     }
 
     return narrativePanel
