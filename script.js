@@ -247,73 +247,14 @@ function loadData (){
 
 
 //SIDEBAR SECTION
-//define function to fetch HTML text from the sidebars folder
-async function getHTMLText(relativePath){
-    const response = await fetch(relativePath);
-    if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-    }
-    const htmlText = await response.text();
-    return htmlText    
-}
-//define function to return correct HTML file based on selected year.  Accepts date as argument and returns the HTML text.
-async function getNarrativeHTML(date){
-    var narrativeHTML = null;
+//declare sidebar as global scope variable
+var sidebar = L.control.sidebar({
+    autopan: true,       // whether to pan the map when opening the sidebar
+    closeButton: true,    // whether to add a close button to the sidebar
+    container: 'sidebar'  // the HTML container ID
+});
 
-    switch (date){
-        case 'January, 1919':
-            narrativeHTML = await getHTMLText('./sidebars/1919');
-            break;
-        case 'June, 1920':
-            narrativeHTML = await getHTMLText('./sidebars/1920');
-            break;
-        case 'May, 1924':
-            narrativeHTML = await getHTMLText('./sidebars/may1924');
-            break;
-        case 'December, 1924':
-            narrativeHTML = await getHTMLText('./sidebars/dec1924');
-            break;
-        case 'May, 1928':
-            narrativeHTML = await getHTMLText('./sidebars/1928');
-            break;
-        case 'September, 1930':
-            narrativeHTML = await getHTMLText('./sidebars/1930');
-            break;
-        case 'July, 1932':
-            narrativeHTML = await getHTMLText('./sidebars/jul1932');
-            break;
-        case 'November, 1932':
-            narrativeHTML = await getHTMLText('./sidebars/nov1932');
-            break;
-        case 'March, 1933':
-            narrativeHTML = await getHTMLText('./sidebars/1933');
-            break;
-    }
-    
-    var narrativeTitle = targetObject.sidebarTitle;
-    var narrativeText = targetObject.sidebarText;
-    var narrativeImage = targetObject.sidebarImage;
-
-    //initialize HTML div element
-    var narrativeContent = document.createElement('div');
-
-    //create content template for narrative panel
-    var contentTemplate = '<h1>%title%</h1><br><p>%text%</p>';
-    var htmlContent = contentTemplate.replace('%title%', narrativeTitle).replace('%text%', narrativeText);
-    
-    narrativeContent.innerHTML = htmlContent;
-    
-    narrativePanel = {
-        id: 'narrative',
-        tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
-        pane: narrativeContent
-    }
-
-    return narrativePanel
-};
-
-
-//declare credits pane
+//declare credits panel as global scope variable
 var creditsPanel = {
     id: 'credits',
     title: 'Credits',
@@ -321,30 +262,71 @@ var creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
-//define function to create narrative panel
-async function buildNarrativePanel(date){
-    const usableHTML = await getNarrativeHTML(date);
-    
-    const narrativePanel = {
-        id: 'narrative',
-        title: 'narrative',
-        pane: usableHTML
+//declare narrative panel as empty global scope variabe
+var narrativePanel = {
+    id: 'narrative',
+    title: 'Narrative',
+    tab: '<i class="fa-solid fa-book"></i>',
+    pane: ''
+};
+
+//define function to fetch HTML text from the sidebars folder
+function getHTMLText(relativePath){
+    const response = fetch(relativePath);
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const htmlText = response;
+    return htmlText;    
+}
+//define function to update the narrativePanel ("newNarrativePanel")
+function newNarrativePanel(date){
+    var narrativeHTML= document.createElement('div');
+
+    switch (date){
+        case 'January, 1919':
+            narrativeHTML = getHTMLText('./sidebars/1919');
+            break;
+        case 'June, 1920':
+            narrativeHTML = getHTMLText('./sidebars/1920');
+            break;
+        case 'May, 1924':
+            narrativeHTML = getHTMLText('./sidebars/may1924');
+            break;
+        case 'December, 1924':
+            narrativeHTML = getHTMLText('./sidebars/dec1924');
+            break;
+        case 'May, 1928':
+            narrativeHTML = getHTMLText('./sidebars/1928');
+            break;
+        case 'September, 1930':
+            narrativeHTML = getHTMLText('./sidebars/1930');
+            break;
+        case 'July, 1932':
+            narrativeHTML = getHTMLText('./sidebars/jul1932');
+            break;
+        case 'November, 1932':
+            narrativeHTML = getHTMLText('./sidebars/nov1932');
+            break;
+        case 'March, 1933':
+            narrativeHTML = getHTMLText('./sidebars/1933');
+            break;
     }
 
-    return narrativePanel
-}
+    var newNarrativePanel = {
+        id: 'narrative',
+        title: 'Narrative',
+        tab: '<i class="fa-solid fa-book"></i>',
+        pane: narrativeHTML
+    };
+
+    return newNarrativePanel;
+};
 
 //define function to add panels to sidebar
 async function buildNewSidebar (narrativePanel, creditsPanel){
-    var sidebar = L.control.sidebar({
-        autopan: true,       // whether to pan the map when opening the sidebar
-        closeButton: true,    // whether to add a close button to the sidebar
-        container: 'sidebar'  // the HTML container ID
-    });
-
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
-    return sidebar
 };
 
 
@@ -365,7 +347,7 @@ function handleDropdownChange(select) {
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel);
+    buildNewSidebar(newNarrativePanel(selectedYear), creditsPanel);
 }
 
 //LAUNCHING THE MAP
@@ -378,7 +360,7 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 //add initial data and sidebar to map
 map.whenReady(function() {
     loadData();
-    buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel);
+    buildNewSidebar(newNarrativePanel(selectedYear), creditsPanel);
 });
 
 //declare custom control
