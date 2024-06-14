@@ -349,7 +349,7 @@ async function buildNarrativePanel (date){
     }
     
     
-    narrativePanel = {
+    const narrativePanel = {
         id: 'narrative',
         tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
         pane: narrativeHTML
