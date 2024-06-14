@@ -412,7 +412,7 @@ map.on('load', loadData());
 map.on('load', sidebar.addTo(map));
 
 //add initial panes to sidepanel
-map.on('load', buildSidepanel(buildNarrativePanel(selectedYear)));
+map.on('load', buildnewSidebar(buildNarrativePanel(selectedYear)));
 
 //declare custom control
 var yearSelectorMenu = L.control.custom({
