@@ -96,55 +96,6 @@ var electionResults = {
     return htmlText    
 }
 
-//create an object to hold sidebar text and titles
-var sidebarContent = {
-    jan_19: {
-        sidebarTitle: 'The Election of 1919',
-        sidebarText: "It is 1919.",
-        sidebarImage: './images/1919.png'
-    },
-    jun_20: {
-        sidebarTitle: 'The Election of 1920',
-        sidebarText: "It is 1920.",
-        sidebarImage: null
-    },
-    may_24: {
-        sidebarTitle: 'The Election of May, 1924',
-        sidebarText: "It is May 1924.",
-        sidebarImage: null
-    },
-    dec_24: {
-        sidebarTitle: 'The Election of December, 1924',
-        sidebarText: "It is December 1924.",
-        sidebarImage: null
-    },
-    may_28: {
-        sidebarTitle: 'The Election of 1928',
-        sidebarText: "It is 1928.",
-        sidebarImage: null
-    },
-    sep_30: {
-        sidebarTitle: 'The Election of 1930',
-        sidebarText: "It is 1930.",
-        sidebarImage: null
-    },
-    jul_32: {
-        sidebarTitle: 'The Election of July, 1932',
-        sidebarText: "It is July 1932.",
-        sidebarImage: null
-    },
-    nov_32: {
-        sidebarTitle: 'The Election of November, 1932',
-        sidebarText: "It is November 1932.",
-        sidebarImage: null
-    },
-    mar_33: {
-        sidebarTitle: 'The Election of 1933',
-        sidebarText: "It is 1933.",
-        sidebarImage: null
-    }
-};
-
 //define selectedYear as a global-scope variable, defaulting to 1919
 var selectedYear = 'January, 1919';
 
@@ -374,8 +325,8 @@ var creditsPanel = {
 }
 
 //define function to add panes to sidebar
-function buildnewSidebar (narrativePanel){
-    sidebar.addPanel(narrativePanel);
+function buildNewSidebar (date){
+    sidebar.addPanel(buildNarrativePanel(date));
     sidebar.addPanel(creditsPanel);
     return sidebar
 };
@@ -412,7 +363,7 @@ map.on('load', loadData());
 map.on('load', sidebar.addTo(map));
 
 //add initial panes to sidepanel
-map.on('load', buildnewSidebar(buildNarrativePanel(selectedYear)));
+map.on('load', buildNewSidebar(buildNarrativePanel(selectedYear)));
 
 //declare custom control
 var yearSelectorMenu = L.control.custom({
