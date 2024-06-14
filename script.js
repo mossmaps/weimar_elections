@@ -325,7 +325,7 @@ async function newNarrativePanel(date){
 
 //HANDLEDROPDOWNCHANGE
 //define the handleDropdownChange function
-function handleDropdownChange(select) {
+async function handleDropdownChange(select) {
     //reset selectedYear
     selectedYear = select.value;    
     
@@ -340,7 +340,7 @@ function handleDropdownChange(select) {
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    narrativePanel = newNarrativePanel(selectedYear);
+    narrativePanel = await newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
 }
@@ -353,9 +353,9 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data and sidebar to map
-map.whenReady(function() {
+map.whenReady(async function() {
     loadData();
-    narrativePanel = newNarrativePanel(selectedYear);
+    narrativePanel = await newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
 });
