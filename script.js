@@ -271,45 +271,45 @@ var narrativePanel = {
 };
 
 //define function to fetch HTML text from the sidebars folder
-function getHTMLText(relativePath){
-    const response = fetch(relativePath);
+async function getHTMLText(relativePath){
+    const response = await fetch(relativePath);
     if (!response.ok) {
         throw new Error('Network response was not ok ' + response.statusText);
     }
-    const htmlText = response;
+    const htmlText = await response.text();
     return htmlText;    
 }
 //define function to update the narrativePanel ("newNarrativePanel")
-function newNarrativePanel(date){
+async function newNarrativePanel(date){
     var narrativeHTML= document.createElement('div');
 
     switch (date){
         case 'January, 1919':
-            narrativeHTML = getHTMLText('./sidebars/1919.html');
+            narrativeHTML = await getHTMLText('./sidebars/1919.html');
             break;
         case 'June, 1920':
-            narrativeHTML = getHTMLText('./sidebars/1920');
+            narrativeHTML = await getHTMLText('./sidebars/1920.html');
             break;
         case 'May, 1924':
-            narrativeHTML = getHTMLText('./sidebars/may1924');
+            narrativeHTML = await getHTMLText('./sidebars/may1924.html');
             break;
         case 'December, 1924':
-            narrativeHTML = getHTMLText('./sidebars/dec1924');
+            narrativeHTML = await getHTMLText('./sidebars/dec1924.html');
             break;
         case 'May, 1928':
-            narrativeHTML = getHTMLText('./sidebars/1928');
+            narrativeHTML = await getHTMLText('./sidebars/1928.html');
             break;
         case 'September, 1930':
-            narrativeHTML = getHTMLText('./sidebars/1930');
+            narrativeHTML = await getHTMLText('./sidebars/1930.html');
             break;
         case 'July, 1932':
-            narrativeHTML = getHTMLText('./sidebars/jul1932');
+            narrativeHTML = await getHTMLText('./sidebars/jul1932.html');
             break;
         case 'November, 1932':
-            narrativeHTML = getHTMLText('./sidebars/nov1932');
+            narrativeHTML = await getHTMLText('./sidebars/nov1932.html');
             break;
         case 'March, 1933':
-            narrativeHTML = getHTMLText('./sidebars/1933');
+            narrativeHTML = await getHTMLText('./sidebars/1933.html');
             break;
     }
 
@@ -322,13 +322,6 @@ function newNarrativePanel(date){
 
     return newNarrativePanel;
 };
-
-//define function to add panels to sidebar
-async function buildNewSidebar (narrativePanel, creditsPanel){
-    sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);
-};
-
 
 //HANDLEDROPDOWNCHANGE
 //define the handleDropdownChange function
@@ -347,7 +340,9 @@ function handleDropdownChange(select) {
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    buildNewSidebar(newNarrativePanel(selectedYear), creditsPanel);
+    narrativePanel = newNarrativePanel(selectedYear);
+    sidebar.addPanel(narrativePanel);
+    sidebar.addPanel(creditsPanel);
 }
 
 //LAUNCHING THE MAP
@@ -360,7 +355,9 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 //add initial data and sidebar to map
 map.whenReady(function() {
     loadData();
-    buildNewSidebar(newNarrativePanel(selectedYear), creditsPanel);
+    narrativePanel = newNarrativePanel(selectedYear);
+    sidebar.addPanel(narrativePanel);
+    sidebar.addPanel(creditsPanel);
 });
 
 //declare custom control
