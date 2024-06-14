@@ -303,7 +303,7 @@ const creditsPanel = {
 
 //define function to create narrative panel
 async function buildNarrativePanel(date){
-    const usableHTML = await getNarrativeHTML(selectedYear);
+    const usableHTML = await getNarrativeHTML(date);
     
     const narrativePanel = {
         id: 'narrative',
@@ -338,7 +338,7 @@ function handleDropdownChange(select) {
     map.removeLayer(dataLayer);
 
     //load new dataLayer
-    loadData()
+    loadData();
 
     //remove old panes
     sidebar.removePanel('narrative');
@@ -355,11 +355,11 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 //add OSM tiles via the Provider plugin
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
-//add initial data to map
-map.whenReady(loadData());
-
-//add initial panes to sidepanel
-map.whenReady(buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel));
+//add initial data and sidebar to map
+map.whenReady(function() {
+    loadData();
+    buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel);
+});
 
 //declare custom control
 var yearSelectorMenu = L.control.custom({
