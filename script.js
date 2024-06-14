@@ -281,7 +281,7 @@ async function getHTMLText(relativePath){
 }
 //define function to update the narrativePanel ("newNarrativePanel")
 async function newNarrativePanel(date){
-    var narrativeHTML= document.createElement('div');
+    var narrativeHTML= '';
 
     switch (date){
         case 'January, 1919':
