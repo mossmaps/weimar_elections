@@ -369,7 +369,7 @@ var creditsPanel = {
 
 //define function to add panes to sidepanel
 function buildSidepanel (narrativePanel){
-    const newSidebar = null
+    const newSidebar = '';
     newSidebar.addPanel(narrativePanel);
     newSidebar.addPanel(creditsPanel);
     return newSidebar
