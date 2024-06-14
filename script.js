@@ -86,16 +86,6 @@ var electionResults = {
     ]
     };
 
-//define function to fetch HTML text from the sidebars folder
-    async function getHTMLText(relativePath){
-    const response = await fetch(relativePath);
-    if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-    }
-    const htmlText = await response.text();
-    return htmlText    
-}
-
 //define selectedYear as a global-scope variable, defaulting to 1919
 var selectedYear = 'January, 1919';
 
@@ -255,6 +245,8 @@ function loadData (){
         }}
     ).addTo(map)}}
 
+
+//SIDEBAR SECTION
 //define sidebar as a global scope variable
 var sidebar = L.control.sidebar({
     autopan: true,       // whether to pan the map when opening the sidebar
@@ -262,75 +254,82 @@ var sidebar = L.control.sidebar({
     container: 'sidebar'  // the HTML container ID
 });
 
-//define function to populate narrative pane based on selected year and the sidebarContent object
-async function buildNarrativePanel (date){
-    var narrativeTitle = null;
+//define function to fetch HTML text from the sidebars folder
+async function getHTMLText(relativePath){
+    const response = await fetch(relativePath);
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const htmlText = await response.text();
+    return htmlText    
+}
+//define function to return correct HTML file based on selected year.  Accepts date as argument and returns the HTML text.
+async function getNarrativeHTML(date){
     var narrativeHTML = null;
 
     switch (date){
         case 'January, 1919':
-            narrativeTitle = 'The Election of 1919';
             narrativeHTML = await getHTMLText('./sidebars/1919');
             break;
         case 'June, 1920':
-            narrativeTitle = 'The Election of 1920';
             narrativeHTML = await getHTMLText('./sidebars/1920');
             break;
         case 'May, 1924':
-            narrativeTitle = 'The Election of May, 1924';
             narrativeHTML = await getHTMLText('./sidebars/may1924');
             break;
         case 'December, 1924':
-            narrativeTitle = 'The Election of December, 1924';
             narrativeHTML = await getHTMLText('./sidebars/dec1924');
             break;
         case 'May, 1928':
-            narrativeTitle = 'The Election of 1928';
             narrativeHTML = await getHTMLText('./sidebars/1928');
             break;
         case 'September, 1930':
-            narrativeTitle = 'The Election of 1930';
             narrativeHTML = await getHTMLText('./sidebars/1930');
             break;
         case 'July, 1932':
-            narrativeTitle = 'The Election of July, 1932';
             narrativeHTML = await getHTMLText('./sidebars/jul1932');
             break;
         case 'November, 1932':
-            narrativeTitle = 'The Election of November, 1932';
             narrativeHTML = await getHTMLText('./sidebars/nov1932');
             break;
         case 'March, 1933':
-            narrativeTitle = 'The Election of 1933';
             narrativeHTML = await getHTMLText('./sidebars/1933');
             break;
     }
-    
-    
-    const narrativePanel = {
-        id: 'narrative',
-        tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
-        pane: narrativeHTML
-    }
 
-    return narrativePanel
+    return narrativeHTML
 };
 
 //declare credits pane
-var creditsPanel = {
+const creditsPanel = {
     id: 'credits',
     title: 'Credits',
     tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
     pane: '<p>The credits go here.</p>'
 }
 
-//define function to add panes to sidebar
-function buildNewSidebar (date){
-    sidebar.addPanel(buildNarrativePanel(date));
+//define function to create narrative pane
+function buildNarrativePanel(date){
+    const usableHTML = getNarrativeHTML(selectedYear);
+    
+    const narrativePanel = {
+        id: 'narrative',
+        title: 'narrative',
+        pane: usableHTML
+    }
+
+    return narrativePanel
+}
+
+//define function to add panels to sidebar
+function buildNewSidebar (narrativePanel, creditsPanel){
+    sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
     return sidebar
 };
 
+
+//HANDLEDROPDOWNCHANGE
 //define the handleDropdownChange function
 function handleDropdownChange(select) {
     //reset selectedYear
@@ -350,6 +349,7 @@ function handleDropdownChange(select) {
     buildSidepanel(buildNarrativePanel(selectedYear));
 }
 
+//LAUNCHING THE MAP
 //declare the map
 var map = L.map('map').setView([51.5, 11.25], 6);
 
@@ -363,7 +363,7 @@ map.on('load', loadData());
 map.on('load', sidebar.addTo(map));
 
 //add initial panes to sidepanel
-map.on('load', buildNewSidebar(buildNarrativePanel(selectedYear)));
+map.on('load', buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel));
 
 //declare custom control
 var yearSelectorMenu = L.control.custom({
