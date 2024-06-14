@@ -86,6 +86,16 @@ var electionResults = {
     ]
     };
 
+//define function to fetch HTML text from the sidebars folder
+    async function getHTMLText(relativePath){
+    const response = await fetch(relativePath);
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const htmlText = await response.text();
+    return htmlText    
+}
+
 //create an object to hold sidebar text and titles
 var sidebarContent = {
     jan_19: {
@@ -296,55 +306,53 @@ function loadData (){
 
 //define function to populate narrative pane based on selected year and the sidebarContent object
 function buildNarrativePanel (date){
-    var targetObject = null;
+    var narrativeTitle = null;
+    var narrativeHTML = null;
 
     switch (date){
         case 'January, 1919':
-            targetObject = sidebarContent.jan_19;
+            narrativeTitle = 'The Election of 1919';
+            narrativeHTML = getHTMLText('./sidebars/1919');
             break;
         case 'June, 1920':
-            targetObject = sidebarContent.jun_20;
+            narrativeTitle = 'The Election of 1920';
+            narrativeHTML = getHTMLText('./sidebars/1920');
             break;
         case 'May, 1924':
-            targetObject = sidebarContent.may_24;
+            narrativeTitle = 'The Election of May, 1924';
+            narrativeHTML = getHTMLText('./sidebars/may1924');
             break;
         case 'December, 1924':
-            targetObject = sidebarContent.dec_24;
+            narrativeTitle = 'The Election of December, 1924';
+            narrativeHTML = getHTMLText('./sidebars/dec1924');
             break;
         case 'May, 1928':
-            targetObject = sidebarContent.may_28;
+            narrativeTitle = 'The Election of 1928';
+            narrativeHTML = getHTMLText('./sidebars/1928');
             break;
         case 'September, 1930':
-            targetObject = sidebarContent.sep_30;
+            narrativeTitle = 'The Election of 1930';
+            narrativeHTML = getHTMLText('./sidebars/1930');
             break;
         case 'July, 1932':
-            targetObject = sidebarContent.jul_32;
+            narrativeTitle = 'The Election of July, 1932';
+            narrativeHTML = getHTMLText('./sidebars/jul1932');
             break;
         case 'November, 1932':
-            targetObject = sidebarContent.nov_32;
+            narrativeTitle = 'The Election of November, 1932';
+            narrativeHTML = getHTMLText('./sidebars/nov1932');
             break;
         case 'March, 1933':
-            targetObject = sidebarContent.mar_33;
+            narrativeTitle = 'The Election of 1933';
+            narrativeHTML = getHTMLText('./sidebars/1933');
             break;
     }
     
-    var narrativeTitle = targetObject.sidebarTitle;
-    var narrativeText = targetObject.sidebarText;
-    var narrativeImage = targetObject.sidebarImage;
-
-    //initialize HTML div element
-    var narrativeContent = document.createElement('div');
-
-    //create content template for narrative panel
-    var contentTemplate = '<h1>%title%</h1><br><img src=%source%><br><p>%text%</p>';
-    var htmlContent = contentTemplate.replace('%title%', narrativeTitle).replace('%source%', narrativeImage).replace('%text%', narrativeText);
-    
-    narrativeContent.innerHTML = htmlContent;
     
     narrativePanel = {
         id: 'narrative',
         tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
-        pane: narrativeContent
+        pane: narrativeHTML
     }
 
     return narrativePanel
