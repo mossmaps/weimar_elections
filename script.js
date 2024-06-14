@@ -87,7 +87,6 @@ var electionResults = {
     };
 
 //create an object to hold sidebar text and titles
-
 var sidebarContent = {
     jan_19: {
         sidebarTitle: 'The Election of 1919',
