@@ -304,6 +304,13 @@ function loadData (){
         }}
     ).addTo(map)}}
 
+//define sidebar as a global scope variable
+var sidebar = L.control.sidebar({
+    autopan: true,       // whether to pan the map when opening the sidebar
+    closeButton: true,    // whether to add a close button to the sidebar
+    container: 'sidebar'  // the HTML container ID
+});
+
 //define function to populate narrative pane based on selected year and the sidebarContent object
 async function buildNarrativePanel (date){
     var narrativeTitle = null;
@@ -358,7 +365,6 @@ async function buildNarrativePanel (date){
     return narrativePanel
 };
 
-
 //declare credits pane
 var creditsPanel = {
     id: 'credits',
@@ -367,17 +373,11 @@ var creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
-//define function to add panes to sidepanel
+//define function to add panes to sidebar
 function buildnewSidebar (narrativePanel){
-    var newSidebar = L.control.sidebar({
-        autopan: true,       // whether to pan the map when opening the sidebar
-        closeButton: true,    // whether to add a close button to the sidebar
-        container: 'sidebar'  // the HTML container ID
-    });
-
-    newSidebar.addPanel(narrativePanel);
-    newSidebaridebar.addPanel(creditsPanel);
-    return newSidebar
+    sidebar.addPanel(narrativePanel);
+    sidebar.addPanel(creditsPanel);
+    return sidebar
 };
 
 //define the handleDropdownChange function
