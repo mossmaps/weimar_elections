@@ -247,13 +247,6 @@ function loadData (){
 
 
 //SIDEBAR SECTION
-//define sidebar as a global scope variable
-var sidebar = L.control.sidebar({
-    autopan: true,       // whether to pan the map when opening the sidebar
-    closeButton: true,    // whether to add a close button to the sidebar
-    container: 'sidebar'  // the HTML container ID
-});
-
 //define function to fetch HTML text from the sidebars folder
 async function getHTMLText(relativePath){
     const response = await fetch(relativePath);
@@ -309,8 +302,8 @@ const creditsPanel = {
 }
 
 //define function to create narrative panel
-function buildNarrativePanel(date){
-    const usableHTML = getNarrativeHTML(selectedYear);
+async function buildNarrativePanel(date){
+    const usableHTML = await getNarrativeHTML(selectedYear);
     
     const narrativePanel = {
         id: 'narrative',
@@ -352,7 +345,7 @@ function handleDropdownChange(select) {
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    buildSidepanel(buildNarrativePanel(selectedYear));
+    buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel);
 }
 
 //LAUNCHING THE MAP
@@ -363,10 +356,10 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data to map
-map.on('load', loadData());
+map.whenReady(loadData());
 
 //add initial panes to sidepanel
-map.on('load', buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel));
+map.whenReady(buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel));
 
 //declare custom control
 var yearSelectorMenu = L.control.custom({
