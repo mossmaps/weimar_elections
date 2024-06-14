@@ -300,7 +300,7 @@ async function getNarrativeHTML(date){
     return narrativeHTML
 };
 
-//declare credits pane
+//declare credits panel
 const creditsPanel = {
     id: 'credits',
     title: 'Credits',
@@ -308,7 +308,7 @@ const creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
-//define function to create narrative pane
+//define function to create narrative panel
 function buildNarrativePanel(date){
     const usableHTML = getNarrativeHTML(selectedYear);
     
@@ -323,6 +323,12 @@ function buildNarrativePanel(date){
 
 //define function to add panels to sidebar
 function buildNewSidebar (narrativePanel, creditsPanel){
+    var sidebar = L.control.sidebar({
+        autopan: true,       // whether to pan the map when opening the sidebar
+        closeButton: true,    // whether to add a close button to the sidebar
+        container: 'sidebar'  // the HTML container ID
+    });
+
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
     return sidebar
@@ -358,9 +364,6 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data to map
 map.on('load', loadData());
-
-//add initial sidepanel to map
-map.on('load', sidebar.addTo(map));
 
 //add initial panes to sidepanel
 map.on('load', buildNewSidebar(buildNarrativePanel(selectedYear), creditsPanel));
