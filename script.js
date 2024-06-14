@@ -368,19 +368,17 @@ var creditsPanel = {
 }
 
 //define function to add panes to sidepanel
-function buildSidepanel (narrativePanel){
-    const newSidebar = '';
+function buildnewSidebar (narrativePanel){
+    var newSidebar = L.control.sidebar({
+        autopan: true,       // whether to pan the map when opening the sidebar
+        closeButton: true,    // whether to add a close button to the sidebar
+        container: 'sidebar'  // the HTML container ID
+    });
+
     newSidebar.addPanel(narrativePanel);
-    newSidebar.addPanel(creditsPanel);
+    newSidebaridebar.addPanel(creditsPanel);
     return newSidebar
 };
-
-//declare the sidebar
-var sidebar = L.control.sidebar({
-    autopan: true,       // whether to pan the map when opening the sidebar
-    closeButton: true,    // whether to add a close button to the sidebar
-    container: 'sidebar'  // the HTML container ID
-});
 
 //define the handleDropdownChange function
 function handleDropdownChange(select) {
