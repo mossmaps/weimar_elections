@@ -315,7 +315,7 @@ async function buildNarrativePanel(date){
 }
 
 //define function to add panels to sidebar
-function buildNewSidebar (narrativePanel, creditsPanel){
+async function buildNewSidebar (narrativePanel, creditsPanel){
     var sidebar = L.control.sidebar({
         autopan: true,       // whether to pan the map when opening the sidebar
         closeButton: true,    // whether to add a close button to the sidebar
