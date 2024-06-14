@@ -305,46 +305,46 @@ function loadData (){
     ).addTo(map)}}
 
 //define function to populate narrative pane based on selected year and the sidebarContent object
-function buildNarrativePanel (date){
+async function buildNarrativePanel (date){
     var narrativeTitle = null;
     var narrativeHTML = null;
 
     switch (date){
         case 'January, 1919':
             narrativeTitle = 'The Election of 1919';
-            narrativeHTML = getHTMLText('./sidebars/1919');
+            narrativeHTML = await getHTMLText('./sidebars/1919');
             break;
         case 'June, 1920':
             narrativeTitle = 'The Election of 1920';
-            narrativeHTML = getHTMLText('./sidebars/1920');
+            narrativeHTML = await getHTMLText('./sidebars/1920');
             break;
         case 'May, 1924':
             narrativeTitle = 'The Election of May, 1924';
-            narrativeHTML = getHTMLText('./sidebars/may1924');
+            narrativeHTML = await getHTMLText('./sidebars/may1924');
             break;
         case 'December, 1924':
             narrativeTitle = 'The Election of December, 1924';
-            narrativeHTML = getHTMLText('./sidebars/dec1924');
+            narrativeHTML = await getHTMLText('./sidebars/dec1924');
             break;
         case 'May, 1928':
             narrativeTitle = 'The Election of 1928';
-            narrativeHTML = getHTMLText('./sidebars/1928');
+            narrativeHTML = await getHTMLText('./sidebars/1928');
             break;
         case 'September, 1930':
             narrativeTitle = 'The Election of 1930';
-            narrativeHTML = getHTMLText('./sidebars/1930');
+            narrativeHTML = await getHTMLText('./sidebars/1930');
             break;
         case 'July, 1932':
             narrativeTitle = 'The Election of July, 1932';
-            narrativeHTML = getHTMLText('./sidebars/jul1932');
+            narrativeHTML = await getHTMLText('./sidebars/jul1932');
             break;
         case 'November, 1932':
             narrativeTitle = 'The Election of November, 1932';
-            narrativeHTML = getHTMLText('./sidebars/nov1932');
+            narrativeHTML = await getHTMLText('./sidebars/nov1932');
             break;
         case 'March, 1933':
             narrativeTitle = 'The Election of 1933';
-            narrativeHTML = getHTMLText('./sidebars/1933');
+            narrativeHTML = await getHTMLText('./sidebars/1933');
             break;
     }
     
