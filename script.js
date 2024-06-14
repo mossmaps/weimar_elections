@@ -285,7 +285,7 @@ function newNarrativePanel(date){
 
     switch (date){
         case 'January, 1919':
-            narrativeHTML = getHTMLText('./sidebars/1919');
+            narrativeHTML = getHTMLText('./sidebars/1919.html');
             break;
         case 'June, 1920':
             narrativeHTML = getHTMLText('./sidebars/1920');
