@@ -289,12 +289,32 @@ async function getNarrativeHTML(date){
             narrativeHTML = await getHTMLText('./sidebars/1933');
             break;
     }
+    
+    var narrativeTitle = targetObject.sidebarTitle;
+    var narrativeText = targetObject.sidebarText;
+    var narrativeImage = targetObject.sidebarImage;
 
-    return narrativeHTML
+    //initialize HTML div element
+    var narrativeContent = document.createElement('div');
+
+    //create content template for narrative panel
+    var contentTemplate = '<h1>%title%</h1><br><p>%text%</p>';
+    var htmlContent = contentTemplate.replace('%title%', narrativeTitle).replace('%text%', narrativeText);
+    
+    narrativeContent.innerHTML = htmlContent;
+    
+    narrativePanel = {
+        id: 'narrative',
+        tab:  '<i class="fa-solid fa-book icon-with-space"></i>',
+        pane: narrativeContent
+    }
+
+    return narrativePanel
 };
 
-//declare credits panel
-const creditsPanel = {
+
+//declare credits pane
+var creditsPanel = {
     id: 'credits',
     title: 'Credits',
     tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
