@@ -364,9 +364,9 @@ map.whenReady(function() {
     loadData();
     sidebar.addTo(map);
     sidebar.addPanel(creditsPanel);
+    sidebar.addPanel(narrativePanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
-    sidebar.addPanel(narrativePanel);
     */
 });
 
