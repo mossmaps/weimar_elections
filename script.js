@@ -404,7 +404,7 @@ map.whenReady(async function() {
     loadData();
     sidebar.addTo(map);
     sidebar.addPanel(creditsPanel);
-    await updateNarrative('January, 1919');
+    updateNarrative('January, 1919');
     sidebar.addPanel(narrativePanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
