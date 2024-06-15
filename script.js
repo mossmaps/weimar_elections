@@ -255,8 +255,6 @@ var sidebar = L.control.sidebar({
     container: 'sidebar'  // the HTML container ID
 });
 
-
-/*
 //declare credits panel as global scope variable
 var creditsPanel = {
     id: 'credits',
@@ -265,6 +263,7 @@ var creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
+/*
 //declare narrative panel as empty global scope variabe
 var narrativePanel = {
     id: 'narrative',
@@ -360,10 +359,11 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 map.whenReady(function() {
     loadData();
     sidebar.addTo(map);
+    sidebar.addPanel(creditsPanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);*/
+    */
 });
 
 //declare custom control
