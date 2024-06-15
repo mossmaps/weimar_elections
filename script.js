@@ -276,7 +276,9 @@ async function updateNarrative(date){
     var htmlResult = '';
     switch (date){
         case 'January, 1919':
-            htmlResult = (fetch('./sidebars/1919.html')).text;
+            fetch('./sidebars/1919.html').then(response =>
+                htmlResult = response.text
+            );
             break;
         /*
             case 'June, 1920':
