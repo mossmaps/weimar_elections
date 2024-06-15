@@ -273,7 +273,7 @@ var narrativePanel = {
 
 //define function to update the pane of the narrativePanel based on selectedYear
 async function updateNarrative(date){
-    const htmlResult = '';
+    var htmlResult = '';
     switch (date){
         case 'January, 1919':
             htmlResult = (await fetch('./sidebars/1919.html')).text;
