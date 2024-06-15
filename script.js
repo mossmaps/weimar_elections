@@ -263,7 +263,7 @@ var creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
-/*
+
 //declare narrative panel as empty global scope variabe
 var narrativePanel = {
     id: 'narrative',
@@ -272,6 +272,7 @@ var narrativePanel = {
     pane: ''
 };
 
+/*
 //define function to fetch HTML text from the sidebars folder
 async function getHTMLText(relativePath){
     const response = await fetch(relativePath);
@@ -338,6 +339,8 @@ function handleDropdownChange(select) {
     //load new dataLayer
     loadData();
 
+    /*
+    SIDEBAR
     //remove old panes
     sidebar.removePanel('narrative');
     sidebar.removePanel('credits');
@@ -346,6 +349,7 @@ function handleDropdownChange(select) {
     narrativePanel = newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
+    */
 }
 
 //LAUNCHING THE MAP
