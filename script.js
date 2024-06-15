@@ -307,8 +307,6 @@ async function updateNarrative(date){
             break;
         */
        default: console.log('error');
-       
-    narrativePanel.pane = htmlResult;
     }
 }
 
