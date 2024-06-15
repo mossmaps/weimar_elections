@@ -246,6 +246,7 @@ function loadData (){
     ).addTo(map)}}
 
 
+
 //SIDEBAR SECTION
 //declare sidebar as global scope variable
 var sidebar = L.control.sidebar({
@@ -254,6 +255,8 @@ var sidebar = L.control.sidebar({
     container: 'sidebar'  // the HTML container ID
 });
 
+
+/*
 //declare credits panel as global scope variable
 var creditsPanel = {
     id: 'credits',
@@ -322,10 +325,11 @@ async function newNarrativePanel(date){
 
     return newNarrativePanel;
 };
+*/
 
 //HANDLEDROPDOWNCHANGE
 //define the handleDropdownChange function
-async function handleDropdownChange(select) {
+function handleDropdownChange(select) {
     //reset selectedYear
     selectedYear = select.value;    
     
@@ -340,7 +344,7 @@ async function handleDropdownChange(select) {
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    narrativePanel = await newNarrativePanel(selectedYear);
+    narrativePanel = newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
 }
@@ -353,11 +357,12 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data and sidebar to map
-map.whenReady(async function() {
+map.whenReady(function() {
     loadData();
-    narrativePanel = await newNarrativePanel(selectedYear);
+    /*
+    narrativePanel = newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);
+    sidebar.addPanel(creditsPanel);*/
 });
 
 //declare custom control
