@@ -263,13 +263,12 @@ var creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
-
 //declare narrative panel as empty global scope variabe
 var narrativePanel = {
     id: 'narrative',
     title: 'Narrative',
     tab: '<i class="fa-solid fa-book"></i>',
-    pane: ''
+    pane: '<p>The narrative goes here.</p>'
 };
 
 /*
