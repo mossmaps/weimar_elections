@@ -271,6 +271,45 @@ var narrativePanel = {
     pane: '<p>The narrative goes here.</p>'
 };
 
+//define function to update the pane of the narrativePanel based on selectedYear
+async function updateNarrative(date){
+    const htmlResult = '';
+    switch (date){
+        case 'January, 1919':
+            htmlResult = (await fetch('./sidebars/1919.html')).text;
+            break;
+        /*
+            case 'June, 1920':
+            narrativeHTML = await getHTMLText('./sidebars/1920.html');
+            break;
+        case 'May, 1924':
+            narrativeHTML = await getHTMLText('./sidebars/may1924.html');
+            break;
+        case 'December, 1924':
+            narrativeHTML = await getHTMLText('./sidebars/dec1924.html');
+            break;
+        case 'May, 1928':
+            narrativeHTML = await getHTMLText('./sidebars/1928.html');
+            break;
+        case 'September, 1930':
+            narrativeHTML = await getHTMLText('./sidebars/1930.html');
+            break;
+        case 'July, 1932':
+            narrativeHTML = await getHTMLText('./sidebars/jul1932.html');
+            break;
+        case 'November, 1932':
+            narrativeHTML = await getHTMLText('./sidebars/nov1932.html');
+            break;
+        case 'March, 1933':
+            narrativeHTML = await getHTMLText('./sidebars/1933.html');
+            break;
+        */
+       default: console.log('error');
+       
+    narrativePanel.pane = htmlResult;
+    }
+}
+
 /*
 //define function to fetch HTML text from the sidebars folder
 async function getHTMLText(relativePath){
