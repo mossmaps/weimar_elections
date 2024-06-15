@@ -398,11 +398,11 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data and sidebar to map
-map.whenReady(async function() {
+map.whenReady(function() {
     loadData();
     sidebar.addTo(map);
     sidebar.addPanel(creditsPanel);
-    await updateNarrative(selectedYear);
+    updateNarrative(selectedYear);
     sidebar.addPanel(narrativePanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
