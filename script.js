@@ -359,6 +359,7 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 //add initial data and sidebar to map
 map.whenReady(function() {
     loadData();
+    sidebar.addTo(map);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
     sidebar.addPanel(narrativePanel);
