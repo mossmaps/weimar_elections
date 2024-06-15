@@ -273,10 +273,11 @@ var narrativePanel = {
 
 //define function to update the pane of the narrativePanel based on selectedYear
 async function updateNarrative(date){
+    
     switch (date){
         case 'January, 1919':
             fetch('./sidebars/1919.html').then(response =>
-                narrativePanel.pane = response.text
+                narrativePanel.pane = response.text()
             )
             break;
         /*
@@ -399,11 +400,11 @@ var map = L.map('map').setView([51.5, 11.25], 6);
 L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 
 //add initial data and sidebar to map
-map.whenReady(function() {
+map.whenReady(async function() {
     loadData();
     sidebar.addTo(map);
     sidebar.addPanel(creditsPanel);
-    updateNarrative(selectedYear);
+    await updateNarrative('January, 2019');
     sidebar.addPanel(narrativePanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
