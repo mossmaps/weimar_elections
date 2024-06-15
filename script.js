@@ -276,9 +276,11 @@ async function updateNarrative(date){
     
     switch (date){
         case 'January, 1919':
-            fetch('./sidebars/1919.html').then(response =>
-                narrativePanel.pane = response.text()
-            )
+            fetch('./sidebars/1919.html')
+            .then(response => response.text())
+            .then(text => {narrativePanel.pane = text;})
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});    
             break;
         /*
             case 'June, 1920':
