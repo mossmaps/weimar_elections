@@ -276,15 +276,15 @@ async function updateNarrative(date){
     
     switch (date){
         case 'January, 1919':
-            var newNarrativePanel = document.createElement('newPane')
-            newNarrativePanel.innerHTML= 
+            var newNarrativePane = document.createElement('newPane')
+            newNarrativePane.innerHTML= 
             fetch('./sidebars/1919.html')
             .then(
                 (response) =>{return response.text()})
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
             
-            narrativePanel = newNarrativePanel;
+            narrativePanel.pane = newNarrativePane;
             break;
         /*
             case 'June, 1920':
