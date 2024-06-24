@@ -399,7 +399,6 @@ function handleDropdownChange(select) {
     //load new dataLayer
     loadData();
 
-    SIDEBAR
     //remove old panes
     sidebar.removePanel('narrative');
     sidebar.removePanel('credits');
