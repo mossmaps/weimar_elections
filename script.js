@@ -287,90 +287,105 @@ async function updateNarrative(date){
             
             narrativePanel.pane = newNarrativePane;
             break;
-        /*
-            case 'June, 1920':
-            narrativeHTML = await getHTMLText('./sidebars/1920.html');
+        case 'June, 1920':
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1920.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'May, 1924':
-            narrativeHTML = await getHTMLText('./sidebars/may1924.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1924a.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'December, 1924':
-            narrativeHTML = await getHTMLText('./sidebars/dec1924.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1924b.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'May, 1928':
-            narrativeHTML = await getHTMLText('./sidebars/1928.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1928.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'September, 1930':
-            narrativeHTML = await getHTMLText('./sidebars/1930.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1930.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'July, 1932':
-            narrativeHTML = await getHTMLText('./sidebars/jul1932.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1932a.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'November, 1932':
-            narrativeHTML = await getHTMLText('./sidebars/nov1932.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1932b.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
         case 'March, 1933':
-            narrativeHTML = await getHTMLText('./sidebars/1933.html');
+            var newNarrativePane = document.createElement('newPane')
+            fetch('./sidebars/1933.html')
+            .then(
+                (response) =>{return response.text()})
+            .then(
+                (text) => newNarrativePane.innerHTML = text)
+            .catch(error => {
+                console.error('Error fetching sidebar:', error)});
+            
+            narrativePanel.pane = newNarrativePane;
             break;
-        */
        default: console.log('error');
     }
 }
-
-/*
-//define function to fetch HTML text from the sidebars folder
-async function getHTMLText(relativePath){
-    const response = await fetch(relativePath);
-    if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-    }
-    const htmlText = await response.text();
-    return htmlText;    
-}
-//define function to update the narrativePanel ("newNarrativePanel")
-async function newNarrativePanel(date){
-    var narrativeHTML= '';
-
-    switch (date){
-        case 'January, 1919':
-            narrativeHTML = await getHTMLText('./sidebars/1919.html');
-            break;
-        case 'June, 1920':
-            narrativeHTML = await getHTMLText('./sidebars/1920.html');
-            break;
-        case 'May, 1924':
-            narrativeHTML = await getHTMLText('./sidebars/may1924.html');
-            break;
-        case 'December, 1924':
-            narrativeHTML = await getHTMLText('./sidebars/dec1924.html');
-            break;
-        case 'May, 1928':
-            narrativeHTML = await getHTMLText('./sidebars/1928.html');
-            break;
-        case 'September, 1930':
-            narrativeHTML = await getHTMLText('./sidebars/1930.html');
-            break;
-        case 'July, 1932':
-            narrativeHTML = await getHTMLText('./sidebars/jul1932.html');
-            break;
-        case 'November, 1932':
-            narrativeHTML = await getHTMLText('./sidebars/nov1932.html');
-            break;
-        case 'March, 1933':
-            narrativeHTML = await getHTMLText('./sidebars/1933.html');
-            break;
-    }
-
-    var newNarrativePanel = {
-        id: 'narrative',
-        title: 'Narrative',
-        tab: '<i class="fa-solid fa-book"></i>',
-        pane: narrativeHTML
-    };
-
-    return newNarrativePanel;
-};
-*/
 
 //HANDLEDROPDOWNCHANGE
 //define the handleDropdownChange function
@@ -384,17 +399,15 @@ function handleDropdownChange(select) {
     //load new dataLayer
     loadData();
 
-    /*
     SIDEBAR
     //remove old panes
     sidebar.removePanel('narrative');
     sidebar.removePanel('credits');
 
     //build new sidepanel
-    narrativePanel = newNarrativePanel(selectedYear);
+    updateNarrative(selectedYear);
     sidebar.addPanel(narrativePanel);
     sidebar.addPanel(creditsPanel);
-    */
 }
 
 //LAUNCHING THE MAP
@@ -408,10 +421,10 @@ L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map);
 map.whenReady(function() {
     loadData();
     sidebar.addTo(map);
-    sidebar.addPanel(creditsPanel);
     updateNarrative('January, 1919');
     console.log(narrativePanel.pane);
     sidebar.addPanel(narrativePanel);
+    sidebar.addPanel(creditsPanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
     */
