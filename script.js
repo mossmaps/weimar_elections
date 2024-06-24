@@ -263,7 +263,7 @@ var creditsPanel = {
     pane: '<p>The credits go here.</p>'
 }
 
-//declare narrative panel as empty global scope variabe
+//declare narrative panel as global scope variabe
 var narrativePanel = {
     id: 'narrative',
     title: 'Narrative',
@@ -405,6 +405,7 @@ map.whenReady(function() {
     sidebar.addTo(map);
     sidebar.addPanel(creditsPanel);
     updateNarrative('January, 1919');
+    console.log(narrativePanel.pane);
     sidebar.addPanel(narrativePanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
