@@ -50,7 +50,7 @@
     position: absolute;
     width: 40px;
     margin: 0;
-    padding: 0;
+    padding: 20;
     list-style-type: none; }
     .leaflet-sidebar-tabs > li, .leaflet-sidebar-tabs > ul > li {
       width: 100%;
