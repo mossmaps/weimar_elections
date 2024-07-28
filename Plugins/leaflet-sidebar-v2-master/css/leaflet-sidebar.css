@@ -107,7 +107,7 @@
   right: 0;
   box-sizing: border-box;
   padding: 10px 20px;
-  overflow-y: auto;}
+  overflow-y: scroll;}
   .leaflet-sidebar-pane.active {
     display: block; }
   @media (min-width: 768px) and (max-width: 991px) {
