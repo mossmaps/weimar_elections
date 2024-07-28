@@ -130,7 +130,7 @@ function setColor(winningParty){
 
 //Function to write and format text for the pop-up window.
 function popupBuild(date, district, parties, percents){
-    let popupString = `<strong>Election Results: ${date}<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
+    let popupString = `<strong>Election Results: ${date}<br>District: ${district}</strong><br>${parties[0]}: ${percents[0]}%<br>`;
     for (let i = 1; i<parties.length; i++){
         popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
     };
