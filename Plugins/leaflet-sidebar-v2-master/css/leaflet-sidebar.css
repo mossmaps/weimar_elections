@@ -2,7 +2,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 125%;
+  width: 100%;
   overflow: hidden;
   z-index: 2000; }
   .leaflet-sidebar.collapsed {
@@ -38,8 +38,8 @@
       right: 10px; } }
 
 .leaflet-sidebar-tabs {
-  padding-left: 5px;
-  padding-top: 10px;
+  top: 0;
+  bottom: 0;
   height: 100%;
   background-color: #fff; }
   .leaflet-sidebar-left .leaflet-sidebar-tabs {
@@ -85,11 +85,11 @@
 
 .leaflet-sidebar-content {
   position: absolute;
-  padding: 10px;
+  top: 0;
+  bottom: 0;
   background-color: rgba(255, 255, 255, 0.95);
   overflow-x: hidden;
-  overflow-y: scroll;
-  }
+  overflow-y: auto; }
   .leaflet-sidebar-left .leaflet-sidebar-content {
     left: 40px;
     right: 0; }
@@ -107,7 +107,7 @@
   left: 0;
   right: 0;
   box-sizing: border-box;
-  padding: 10px 20px;}
+  padding: 10px 20px; }
   .leaflet-sidebar-pane.active {
     display: block; }
   @media (min-width: 768px) and (max-width: 991px) {
