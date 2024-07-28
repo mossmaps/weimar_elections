@@ -13,3 +13,8 @@
     margin-top: 8px;
     vertical-align: middle; /* Adjust the value as needed */
   }
+
+  .narrativeTabIcon {
+    vertical-align: middle;
+    scale: 80%;
+  }
