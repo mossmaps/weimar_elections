@@ -8,3 +8,8 @@
     font-family:'Times New Roman', Times, serif;
     font-weight: bolder;
 }
+
+.icon-with-space {
+    margin-top: 8px;
+    vertical-align: middle; /* Adjust the value as needed */
+  }
