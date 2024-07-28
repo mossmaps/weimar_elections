@@ -422,6 +422,7 @@ map.whenReady(function() {
 var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
+    '<link rel="stylesheet" href="./stylesheet.css">' + 
     '<h1>Select Election</h1>' +
     '<br>'+
     '<select onchange="handleDropdownChange(this)">' +

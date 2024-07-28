@@ -18,6 +18,11 @@
     scale: 80%;
   }
 
-.yearSelector{
-    padding-bottom: 15px;
-}
+  .custom-control{
+    width: 100%;
+    background-color: #fff;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: center; 
+ }
