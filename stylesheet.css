@@ -1,7 +1,7 @@
 .summarytext {
     font-family:'Times New Roman', Times, serif; 
     font-size: medium;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .summarytitle {
