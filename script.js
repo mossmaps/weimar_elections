@@ -259,7 +259,7 @@ var sidebar = L.control.sidebar({
 var narrativePanel = {
     id: 'narrative',
     title: 'Narrative',
-    tab: '<img src="./media/open-book-icon.svg">' ,
+    tab: '<img src="./media/open-book-icon.svg" class="narrativeTabIcon">',
     pane: '<p>The narrative goes here.</p>'
 };
 
