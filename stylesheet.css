@@ -1,13 +1,11 @@
 .summarytext {
     font-family:'Times New Roman', Times, serif; 
     font-size: medium;
-    overflow-y: scroll ;
 }
 
 .summarytitle {
     font-family:'Times New Roman', Times, serif;
     font-weight: bolder;
-    overflow-y: auto;
 }
 
 .icon-with-space {
