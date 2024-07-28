@@ -24,5 +24,6 @@
     border-style: solid;
     border-color: black;
     border-width: 1px;
-    text-align: center; 
+    text-align: center;
+    padding-bottom: 15px; 
  }
