@@ -425,7 +425,7 @@ var yearSelectorMenu = L.control.custom({
     '<link rel="stylesheet" href="./stylesheet.css">' + 
     '<h1>Select Election</h1>' +
     '<br>'+
-    '<select onchange="handleDropdownChange(this)" style="padding-bottom:10px">' +
+    '<select onchange="handleDropdownChange(this)" style="margin-bottom:10px">' +
         '<option value="January, 1919">January, 1919</option>' +  
         '<option value="June, 1920">June, 1920</option>' +
         '<option value="May, 1924">May, 1924</option>' +
