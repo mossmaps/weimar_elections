@@ -255,14 +255,6 @@ var sidebar = L.control.sidebar({
     container: 'sidebar'  // the HTML container ID
 });
 
-//declare credits panel as global scope variable
-var creditsPanel = {
-    id: 'credits',
-    title: 'Credits',
-    tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
-    pane: '<p>The credits go here.</p>'
-}
-
 //declare narrative panel as global scope variabe
 var narrativePanel = {
     id: 'narrative',
@@ -401,12 +393,10 @@ function handleDropdownChange(select) {
 
     //remove old panes
     sidebar.removePanel('narrative');
-    sidebar.removePanel('credits');
 
     //build new sidepanel
     updateNarrative(selectedYear);
     sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);
 }
 
 //LAUNCHING THE MAP
@@ -423,7 +413,6 @@ map.whenReady(function() {
     updateNarrative('January, 1919');
     console.log(narrativePanel.pane);
     sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
     */
