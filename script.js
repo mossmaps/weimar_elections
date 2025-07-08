@@ -130,7 +130,7 @@ function setColor(winningParty){
 
 //Function to write and format text for the pop-up window.
 function popupBuild(date, district, parties, percents){
-    let popupString = `<strong>Election Results: ${date}<br>District: ${district}<br>${parties[0]}: ${percents[0]}%</strong><br>`;
+    let popupString = `<strong>Election Results: ${date}<br>District: ${district}</strong><br>${parties[0]}: ${percents[0]}%<br>`;
     for (let i = 1; i<parties.length; i++){
         popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
     };
@@ -255,19 +255,11 @@ var sidebar = L.control.sidebar({
     container: 'sidebar'  // the HTML container ID
 });
 
-//declare credits panel as global scope variable
-var creditsPanel = {
-    id: 'credits',
-    title: 'Credits',
-    tab: '<i class="fa-solid fa-signature icon-with-space"></i>',
-    pane: '<p>The credits go here.</p>'
-}
-
 //declare narrative panel as global scope variabe
 var narrativePanel = {
     id: 'narrative',
     title: 'Narrative',
-    tab: '<i class="fa-solid fa-book"></i>',
+    tab: '<img src="./media/open-book-icon.svg" class="narrativeTabIcon">',
     pane: '<p>The narrative goes here.</p>'
 };
 
@@ -401,12 +393,10 @@ function handleDropdownChange(select) {
 
     //remove old panes
     sidebar.removePanel('narrative');
-    sidebar.removePanel('credits');
 
     //build new sidepanel
     updateNarrative(selectedYear);
     sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);
 }
 
 //LAUNCHING THE MAP
@@ -423,7 +413,6 @@ map.whenReady(function() {
     updateNarrative('January, 1919');
     console.log(narrativePanel.pane);
     sidebar.addPanel(narrativePanel);
-    sidebar.addPanel(creditsPanel);
     /*
     narrativePanel = newNarrativePanel(selectedYear);
     */
@@ -433,9 +422,10 @@ map.whenReady(function() {
 var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
+    '<link rel="stylesheet" href="./stylesheet.css">' + 
     '<h1>Select Election</h1>' +
     '<br>'+
-    '<select onchange="handleDropdownChange(this)">' +
+    '<select onchange="handleDropdownChange(this)" style="margin-bottom:10px">' +
         '<option value="January, 1919">January, 1919</option>' +  
         '<option value="June, 1920">June, 1920</option>' +
         '<option value="May, 1924">May, 1924</option>' +

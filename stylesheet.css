@@ -1,0 +1,29 @@
+.summarytext {
+    font-family:'Times New Roman', Times, serif; 
+    font-size: medium;
+}
+
+.summarytitle {
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
+
+.icon-with-space {
+    margin-top: 8px;
+    vertical-align: middle; /* Adjust the value as needed */
+  }
+
+  .narrativeTabIcon {
+    vertical-align: bottom;
+    scale: 80%;
+  }
+
+  .custom-control{
+    width: 100%;
+    background-color: #fff;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+ }
