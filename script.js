@@ -413,9 +413,7 @@ map.whenReady(function() {
     updateNarrative('January, 1919');
     console.log(narrativePanel.pane);
     sidebar.addPanel(narrativePanel);
-    /*
-    narrativePanel = newNarrativePanel(selectedYear);
-    */
+    sidebar.open('narrative');
 });
 
 //declare custom control
