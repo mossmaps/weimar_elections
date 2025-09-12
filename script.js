@@ -130,7 +130,7 @@ function setColor(winningParty){
 
 //Function to write and format text for the pop-up window.
 function popupBuild(date, district, parties, percents){
-    let popupString = `<strong>Election Results: ${date}<br>District: ${district}</strong><br>${parties[0]}: ${percents[0]}%<br>`;
+    let popupString = `<strong>Wahlergebnisse: ${date}<br>Wahlkreis: ${district}</strong><br>${parties[0]}: ${percents[0]}%<br>`;
     for (let i = 1; i<parties.length; i++){
         popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
     };
@@ -258,7 +258,7 @@ var sidebar = L.control.sidebar({
 //declare narrative panel as global scope variabe
 var narrativePanel = {
     id: 'narrative',
-    title: 'Narrative',
+    title: 'Einführungstext',
     tab: '<img src="./media/open-book-icon.svg" class="narrativeTabIcon">',
     pane: '<p>The narrative goes here.</p>'
 };
@@ -421,17 +421,17 @@ var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
     '<link rel="stylesheet" href="./stylesheet.css">' + 
-    '<h1>Select Election</h1>' +
+    '<h1>Wahl auswählen</h1>' +
     '<select onchange="handleDropdownChange(this)" style="margin-bottom:10px">' +
-        '<option value="January, 1919">January, 1919</option>' +  
-        '<option value="June, 1920">June, 1920</option>' +
-        '<option value="May, 1924">May, 1924</option>' +
-        '<option value="December, 1924">December, 1924</option>' +
-        '<option value="May, 1928">May, 1928</option>' +
+        '<option value="January, 1919">Januar, 1919</option>' +  
+        '<option value="June, 1920">Juni, 1920</option>' +
+        '<option value="May, 1924">Mai, 1924</option>' +
+        '<option value="December, 1924">Dezember, 1924</option>' +
+        '<option value="May, 1928">Mai, 1928</option>' +
         '<option value="September, 1930">September, 1930</option>' +
-        '<option value="July, 1932">July, 1932</option>' +
+        '<option value="July, 1932">Juli, 1932</option>' +
         '<option value="November, 1932">November, 1932</option>' +
-        '<option value="March, 1933">March, 1933</option>' +
+        '<option value="March, 1933">März, 1933</option>' +
     '</select>' +
     '</div>',
     classes: 'custom-control'
