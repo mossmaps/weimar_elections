@@ -89,6 +89,18 @@ var electionResults = {
 //define selectedYear as a global-scope variable, defaulting to 1919
 var selectedYear = 'January, 1919';
 
+var yearLocalized = {
+    'January, 1919' : 'Januar 1919',
+    'June, 1920' : 'Juni 1920',
+    'May, 1924' : 'Mai 1924',
+    'December, 1924' : 'Dezember 1924',
+    'May, 1928' : 'Mai 1928',
+    'September, 1930' : 'September 1930',
+    'July, 1932' : 'Juli 1932',
+    'November, 1932' : 'November 1932',
+    'March, 1933' : 'März 1933'
+}
+
 //define myStyle as a global variable
 var myStyle = null;
 
@@ -132,7 +144,8 @@ function setColor(winningParty){
 function popupBuild(date, district, parties, percents){
     let popupString = `<strong>Wahlergebnisse: ${date}<br>Wahlkreis: ${district}</strong><br>${parties[0]}: ${percents[0]}%<br>`;
     for (let i = 1; i<parties.length; i++){
-        popupString = popupString + `${parties[i]}: ${percents[i]}%<br>`
+        let party = 'Other' == parties[i] ? 'Andere' : parties[i];
+        popupString = popupString + `${party}: ${percents[i]}%<br>`
     };
     return popupString;
 }
@@ -152,13 +165,13 @@ function loadData (){
             onEachFeature: function (feature, layer){
                 //set thisYearsParties
                 let thisYearsParties = feature.properties.parties_1919;
-        
+
                 //set thisYearsPercents
                 let thisYearsPercents = feature.properties.percents_1919;
-                
+
                 //set popup
-                layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
-                
+                layer.bindPopup(popupBuild(yearLocalized[selectedYear], feature.properties.deuName, thisYearsParties, thisYearsPercents));
+
                 //set fill color based on winner, using the setColor function
                 myStyle = {
                     'color' : '#000000',
@@ -168,8 +181,8 @@ function loadData (){
                 }
                 layer.setStyle(myStyle)
             }
-        }).addTo(map)    
-    } else {  
+        }).addTo(map)
+    } else {
         dataLayer = L.geoJSON(electionResults, {
         style: defaultStyle,
         onEachFeature: function (feature, layer){
@@ -193,7 +206,7 @@ function loadData (){
                     break;
                 case 'July, 1932':
                     thisYearsParties = feature.properties.parties_1932a;
-                    break;;    
+                    break;
                 case 'November, 1932':
                     thisYearsParties = feature.properties.parties_1932b;
                     break;
@@ -201,7 +214,7 @@ function loadData (){
                     thisYearsParties = feature.properties.parties_1933;
                     break;
             }
-    
+
             //set thisYearsPercents
             let thisYearsPercents = null;
             switch (selectedYear){
@@ -222,7 +235,7 @@ function loadData (){
                     break;
                 case 'July, 1932':
                     thisYearsPercents = feature.properties.percents_1932a;
-                    break;;    
+                    break;
                 case 'November, 1932':
                     thisYearsPercents = feature.properties.percents_1932b;
                     break;
@@ -230,10 +243,10 @@ function loadData (){
                     thisYearsPercents = feature.properties.percents_1933;
                     break;
             }
-            
+
             //set popup
-            layer.bindPopup(popupBuild(selectedYear, feature.properties.engName, thisYearsParties, thisYearsPercents));
-            
+            layer.bindPopup(popupBuild(yearLocalized[selectedYear], feature.properties.deuName, thisYearsParties, thisYearsPercents));
+
             //set fill color based on winner, using the setColor function
             myStyle = {
                 'color' : '#000000',
@@ -265,7 +278,7 @@ var narrativePanel = {
 
 //define function to update the pane of the narrativePanel based on selectedYear
 async function updateNarrative(date){
-    
+
     switch (date){
         case 'January, 1919':
             var newNarrativePane = document.createElement('newPane')
@@ -276,7 +289,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'June, 1920':
@@ -288,7 +301,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'May, 1924':
@@ -300,7 +313,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'December, 1924':
@@ -312,7 +325,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'May, 1928':
@@ -324,7 +337,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'September, 1930':
@@ -336,7 +349,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'July, 1932':
@@ -348,7 +361,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'November, 1932':
@@ -360,7 +373,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
         case 'March, 1933':
@@ -372,7 +385,7 @@ async function updateNarrative(date){
                 (text) => newNarrativePane.innerHTML = text)
             .catch(error => {
                 console.error('Error fetching sidebar:', error)});
-            
+
             narrativePanel.pane = newNarrativePane;
             break;
        default: console.log('error');
@@ -383,8 +396,8 @@ async function updateNarrative(date){
 //define the handleDropdownChange function
 function handleDropdownChange(select) {
     //reset selectedYear
-    selectedYear = select.value;    
-    
+    selectedYear = select.value;
+
     //remove old dataLayer
     map.removeLayer(dataLayer);
 
@@ -420,18 +433,18 @@ map.whenReady(function() {
 var yearSelectorMenu = L.control.custom({
     position: 'topright',
     content: '<div class="custom-control">' +
-    '<link rel="stylesheet" href="./stylesheet.css">' + 
+    '<link rel="stylesheet" href="./stylesheet.css">' +
     '<h1>Wahl auswählen</h1>' +
     '<select onchange="handleDropdownChange(this)" style="margin-bottom:10px">' +
-        '<option value="January, 1919">Januar, 1919</option>' +  
-        '<option value="June, 1920">Juni, 1920</option>' +
-        '<option value="May, 1924">Mai, 1924</option>' +
-        '<option value="December, 1924">Dezember, 1924</option>' +
-        '<option value="May, 1928">Mai, 1928</option>' +
-        '<option value="September, 1930">September, 1930</option>' +
-        '<option value="July, 1932">Juli, 1932</option>' +
-        '<option value="November, 1932">November, 1932</option>' +
-        '<option value="March, 1933">März, 1933</option>' +
+        '<option value="January, 1919">' + yearLocalized['January, 1919'] + '</option>' +
+        '<option value="June, 1920">' + yearLocalized['June, 1920'] + '</option>' +
+        '<option value="May, 1924">' + yearLocalized['May, 1924'] + '</option>' +
+        '<option value="December, 1924">' + yearLocalized['December, 1924'] + '</option>' +
+        '<option value="May, 1928">' + yearLocalized['May, 1928'] + '</option>' +
+        '<option value="September, 1930">' + yearLocalized['September, 1930'] + '</option>' +
+        '<option value="July, 1932">' + yearLocalized['July, 1932'] + '</option>' +
+        '<option value="November, 1932">' + yearLocalized['November, 1932'] + '</option>' +
+        '<option value="March, 1933">' + yearLocalized['March, 1933'] + '</option>' +
     '</select>' +
     '</div>',
     classes: 'custom-control'
